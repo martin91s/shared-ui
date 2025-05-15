@@ -19207,7 +19207,7 @@ ${codeFrame}` : message);
   const _sfc_main = {
     __name: 'ClientSearch.ce',
     props: {
-          modelValue: {
+          value: {
               type: String,
               default: '',
           },
@@ -19216,7 +19216,7 @@ ${codeFrame}` : message);
               default: () => ([]),
           },
       },
-    emits: ['update:modelValue', 'select'],
+    emits: ['input', 'select'],
     setup(__props, { emit: __emit }) {
 
       const props = __props;
@@ -19225,10 +19225,10 @@ ${codeFrame}` : message);
 
       const inputValue = computed({
           get() {
-              return props.modelValue;
+              return props.value;
           },
           set(value) {
-              emit('update:modelValue', value);
+              emit('input', value);
           },
       });
 

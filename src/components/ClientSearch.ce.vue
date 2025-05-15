@@ -50,7 +50,7 @@
     import { computed } from 'vue';
 
     const props = defineProps({
-        modelValue: {
+        value: {
             type: String,
             default: '',
         },
@@ -60,14 +60,14 @@
         },
     });
 
-    const emit = defineEmits(['update:modelValue', 'select']);
+    const emit = defineEmits(['input', 'select']);
 
     const inputValue = computed({
         get() {
-            return props.modelValue;
+            return props.value;
         },
         set(value) {
-            emit('update:modelValue', value);
+            emit('input', value);
         },
     });
 </script>

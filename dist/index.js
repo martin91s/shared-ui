@@ -19202,7 +19202,7 @@ const _hoisted_10 = { class: "tags" };
 const _sfc_main = {
   __name: 'ClientSearch.ce',
   props: {
-        modelValue: {
+        value: {
             type: String,
             default: '',
         },
@@ -19211,7 +19211,7 @@ const _sfc_main = {
             default: () => ([]),
         },
     },
-  emits: ['update:modelValue', 'select'],
+  emits: ['input', 'select'],
   setup(__props, { emit: __emit }) {
 
     const props = __props;
@@ -19220,10 +19220,10 @@ const _sfc_main = {
 
     const inputValue = computed({
         get() {
-            return props.modelValue;
+            return props.value;
         },
         set(value) {
-            emit('update:modelValue', value);
+            emit('input', value);
         },
     });
 
