@@ -6,7 +6,7 @@
             @input="$emit('update:modelValue', $event.target.value)"
             placeholder="Search clients..."
         />
-        <ul v-if="results.length">
+        <ul v-if="results && results.length">
             <li v-for="result in results" :key="result.number" @click="$emit('select', result)">
                 {{ result.name }} ({{ result.number }})
             </li>

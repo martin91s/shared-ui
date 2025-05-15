@@ -8189,7 +8189,7 @@ if (!!(process.env.NODE_ENV !== "production")) {
   initDev();
 }
 
-const _style_0 = "\ninput[data-v-7fc6cdf7] {\n        padding: 0.5rem;\n        width: 100%;\n}\nul[data-v-7fc6cdf7] {\n        list-style: none;\n        padding: 0;\n}\nli[data-v-7fc6cdf7] {\n        cursor: pointer;\n        padding: 0.25rem 0;\n}\n";
+const _style_0 = "\ninput[data-v-0fb29b96] {\n        padding: 0.5rem;\n        width: 100%;\n}\nul[data-v-0fb29b96] {\n        list-style: none;\n        padding: 0;\n}\nli[data-v-0fb29b96] {\n        cursor: pointer;\n        padding: 0.25rem 0;\n}\n";
 
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
@@ -8224,7 +8224,7 @@ return (_ctx, _cache) => {
       onInput: _cache[0] || (_cache[0] = $event => (_ctx.$emit('update:modelValue', $event.target.value))),
       placeholder: "Search clients..."
     }, null, 40, _hoisted_1),
-    (__props.results.length)
+    (__props.results && __props.results.length)
       ? (openBlock(), createElementBlock("ul", _hoisted_2, [
           (openBlock(true), createElementBlock(Fragment, null, renderList(__props.results, (result) => {
             return (openBlock(), createElementBlock("li", {
@@ -8239,13 +8239,11 @@ return (_ctx, _cache) => {
 }
 
 };
-const VueClientSearch = /*#__PURE__*/_export_sfc(_sfc_main, [['styles',[_style_0]],['__scopeId',"data-v-7fc6cdf7"]]);
+const VueClientSearch = /*#__PURE__*/_export_sfc(_sfc_main, [['styles',[_style_0]],['__scopeId',"data-v-0fb29b96"]]);
 
 const ClientSearch = defineCustomElement(VueClientSearch);
 
-function register(tagName = 'client-search') {
-    customElements.define(tagName, ClientSearch);
+if (typeof window !== 'undefined') {
+    customElements.define('client-search', ClientSearch);
 }
-
-export { ClientSearch, register };
 //# sourceMappingURL=index.js.map

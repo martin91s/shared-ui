@@ -1,8 +1,8 @@
-import { defineCustomElement } from 'vue';
-import VueClientSearch from './components/ClientSearch.ce.vue';
+import { defineCustomElement } from 'vue'
+import VueClientSearch from './components/ClientSearch.ce.vue'
 
-export const ClientSearch = defineCustomElement(VueClientSearch);
+const ClientSearch = defineCustomElement(VueClientSearch)
 
-export function register(tagName = 'client-search') {
-    customElements.define(tagName, ClientSearch);
+if (typeof window !== 'undefined') {
+    customElements.define('client-search', ClientSearch)
 }
