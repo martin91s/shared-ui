@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { fileURLToPath, URL } from 'node:url'
 import { resolve } from 'path'
 
 export default defineConfig({
@@ -9,21 +8,12 @@ export default defineConfig({
       entry: resolve(__dirname, 'web-components.js'),
       name: 'SharedUI',
       fileName: 'web-components',
-      formats: ['es'], // needed for use with <script type="module">
+      formats: ['es'],
     },
     rollupOptions: {
-      external: [],
-      output: {
-        globals: {
-          vue: 'Vue',
-        },
-      },
+      // ❌ DO NOT externalize vue
+      external: [], // or just remove this key entirely
     },
   },
   plugins: [vue()],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-    },
-  },
 })
