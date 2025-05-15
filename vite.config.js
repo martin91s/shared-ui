@@ -22,7 +22,6 @@ export default defineConfig({
     },
   },
   build: {
-    cssCodeSplit: false,
     lib: {
       entry: './src/web-comp.js',
       format: ['es', 'cjs'],
