@@ -1,0 +1,18 @@
+import { Meta, Title, Stories, } from '@storybook/blocks';
+import * as ClientSearchStories from './ClientSearch.stories';
+
+<Meta of={ClientSearchStories} />
+<Title />
+A reusable Web Component for client search boxes, dropdowns, and selection.
+
+### Usage
+In your html
+```vue
+<client-search
+    @search-input="searchInput"
+    @selected="clientSelected"
+    :results="searchResults"
+/>
+```
+
+<Stories />

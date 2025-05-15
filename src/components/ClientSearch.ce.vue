@@ -1,6 +1,7 @@
 <template>
-    <div class="client-search">
-        <input
+    <div
+        class="client-search">
+        <b-form-input
             type="text"
             :value="modelValue"
             @input="$emit('update:modelValue', $event.target.value)"
@@ -19,7 +20,6 @@
                         <span class="number">({{ result.number }})</span>
                     </div>
                     <div class="badges">
-                        <!-- Placeholder badges -->
                         <span class="badge">🟢</span>
                         <span class="badge">🔴</span>
                     </div>
@@ -38,9 +38,9 @@
                 </div>
 
                 <div class="tags">
-                    <span v-if="result.utr" class="tag utr">UTR: {{ result.utr }}</span>
-                    <span v-if="result.vat" class="tag vat">VAT: {{ result.vat }}</span>
-                    <span v-if="result.reg" class="tag reg">REG: {{ result.reg }}</span>
+                    <b-badge v-if="result.utr" variant="primary">UTR: {{ result.utr }}</b-badge>
+                    <b-badge v-if="result.vat" variant="secondary">VAT: {{ result.vat }}</b-badge>
+                    <b-badge v-if="result.reg" variant="danger">REG: {{ result.reg }}</b-badge>
                 </div>
             </li>
         </ul>
@@ -55,7 +55,7 @@
     defineEmits(['update:modelValue', 'select']);
 </script>
 
-<style scoped>
+<style>
     .client-search {
         width: 100%;
         font-family: system-ui, sans-serif;
@@ -65,21 +65,21 @@
         padding: 0.75rem;
         width: 100%;
         font-size: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 6px;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
         box-sizing: border-box;
-        margin-bottom: 1rem;
     }
 
     .results {
         list-style: none;
         padding: 0;
         margin: 0;
+        border: 1px solid #d1d5db;
+        border-top: none;
     }
 
     .result-item {
-        border: 1px solid #eee;
-        border-radius: 8px;
+        border-radius: 4px;
         padding: 1rem;
         margin-bottom: 0.75rem;
         background: #fff;

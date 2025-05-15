@@ -1,46 +1,19 @@
 // src/stories/ClientSearchCe.stories.js
-import ClientSearch from '../components/ClientSearch.vue';
+import ClientSearchCe from '../components/ClientSearch.ce.vue';
 
 export default {
     title: 'ClientSearch',
-    component: ClientSearch,
+    component: ClientSearchCe,
 };
 
 export const Default = () => ({
-    components: { ClientSearch: ClientSearch },
+    components: { ClientSearch: ClientSearchCe },
     template: `
-    <ClientSearch :results="results" @search-input="onInput" @selected="onSelect" />
-  `,
+        <ClientSearch :results="results" @search-input="onInput" @selected="onSelect" />
+    `,
     data() {
         return {
-            results: [
-                {
-                    name: "Acme Ltd",
-                    number: "1234567890",
-                    address: "Unit 35, Commons, Duleek Business Park, Co. Meath, A92 N15E, Ireland",
-                    email: "info@acmeltd.com",
-                    phone: "07890 098765",
-                    country: "Ireland",
-                    type: "Private Limited Company",
-                    category: "Software",
-                    utr: "1234567890",
-                    vat: "01234567890",
-                    reg: "12345678"
-                },
-                {
-                    name: "Acme Ltd",
-                    number: "1234567890",
-                    address: "Unit 35, Commons, Duleek Business Park, Co. Meath, A92 N15E, Ireland",
-                    email: "info@acmeltd.com",
-                    phone: "07890 098765",
-                    country: "Ireland",
-                    type: "Private Limited Company",
-                    category: "Software",
-                    utr: "1234567890",
-                    vat: "01234567890",
-                    reg: "12345678"
-                },
-            ],
+            results: [],
         };
     },
     methods: {
@@ -54,7 +27,7 @@ export const Default = () => ({
 });
 
 export const DropdownVisible = () => ({
-    components: { ClientSearch: ClientSearch },
+    components: { ClientSearch: ClientSearchCe },
     template: `
     <ClientSearch
       :results="results"
