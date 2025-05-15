@@ -50,24 +50,24 @@
     import { computed } from 'vue';
 
     const props = defineProps({
-        value: {
+        modelValue: {
             type: String,
             default: '',
         },
         results: {
             type: Array,
-            default: () => ([]),
+            default: () => [],
         },
     });
 
-    const emit = defineEmits(['input', 'select']);
+    const emit = defineEmits(['update:modelValue', 'select']);
 
     const inputValue = computed({
         get() {
-            return props.value;
+            return props.modelValue;
         },
         set(value) {
-            emit('input', value);
+            emit('update:modelValue', value);
         },
     });
 </script>
