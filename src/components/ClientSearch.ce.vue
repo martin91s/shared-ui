@@ -3,8 +3,7 @@
         class="client-search">
         <b-form-input
             type="text"
-            :value="modelValue"
-            @input="$emit('update:modelValue', $event.target.value)"
+            v-model="inputValue"
             placeholder="Search clients..."
         />
         <ul v-if="results?.length" class="results">
@@ -48,11 +47,29 @@
 </template>
 
 <script setup>
-    defineProps({
-        modelValue: String,
-        results: Array,
+    import { computed } from 'vue';
+
+    const props = defineProps({
+        modelValue: {
+            type: String,
+            default: '',
+        },
+        results: {
+            type: Array,
+            default: () => ([]),
+        },
     });
-    defineEmits(['update:modelValue', 'select']);
+
+    const emit = defineEmits(['update:modelValue', 'select']);
+
+    const inputValue = computed({
+        get() {
+            return props.modelValue;
+        },
+        set(value) {
+            emit('update:modelValue', value);
+        },
+    });
 </script>
 
 <style>
