@@ -19198,18 +19198,34 @@ const _hoisted_8 = { class: "contact" };
 const _hoisted_9 = { class: "labels" };
 const _hoisted_10 = { class: "tags" };
 
-
+    
 const _sfc_main = {
   __name: 'ClientSearch.ce',
   props: {
-        modelValue: String,
-        results: Array,
+        modelValue: {
+            type: String,
+            default: '',
+        },
+        results: {
+            type: Array,
+            default: () => ([]),
+        },
     },
   emits: ['update:modelValue', 'select'],
-  setup(__props) {
+  setup(__props, { emit: __emit }) {
 
-    
-    
+    const props = __props;
+
+    const emit = __emit;
+
+    const inputValue = computed({
+        get() {
+            return props.modelValue;
+        },
+        set(value) {
+            emit('update:modelValue', value);
+        },
+    });
 
 return (_ctx, _cache) => {
   const _component_b_form_input = _sfc_main$1;
@@ -19218,10 +19234,10 @@ return (_ctx, _cache) => {
   return (openBlock(), createElementBlock("div", _hoisted_1, [
     createVNode(_component_b_form_input, {
       type: "text",
-      value: __props.modelValue,
-      onInput: _cache[0] || (_cache[0] = $event => (_ctx.$emit('update:modelValue', $event.target.value))),
+      modelValue: inputValue.value,
+      "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => ((inputValue).value = $event)),
       placeholder: "Search clients..."
-    }, null, 8, ["value"]),
+    }, null, 8, ["modelValue"]),
     (__props.results?.length)
       ? (openBlock(), createElementBlock("ul", _hoisted_2, [
           (openBlock(true), createElementBlock(Fragment, null, renderList(__props.results, (result) => {
