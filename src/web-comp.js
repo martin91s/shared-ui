@@ -1,5 +1,5 @@
 import { defineCustomElement } from 'vue'
-import ClientSearchComponent from './components/ClientSearch.ce.vue'
+import ClientSearchComponent from './components/ClientSearch.vue'
 
 const ClientSearch = defineCustomElement(ClientSearchComponent)
 

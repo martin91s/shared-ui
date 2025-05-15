@@ -18267,7 +18267,7 @@ ${codeFrame}` : message);
 }
 registerRuntimeCompiler(compileToFunction);
 
-const _style_0 = "\n.client-search[data-v-65ea378b] {\n        width: 100%;\n        font-family: system-ui, sans-serif;\n}\ninput[data-v-65ea378b] {\n        padding: 0.75rem;\n        width: 100%;\n        font-size: 1rem;\n        border: 1px solid #ccc;\n        border-radius: 6px;\n        box-sizing: border-box;\n        margin-bottom: 1rem;\n}\n.results[data-v-65ea378b] {\n        list-style: none;\n        padding: 0;\n        margin: 0;\n}\n.result-item[data-v-65ea378b] {\n        border: 1px solid #eee;\n        border-radius: 8px;\n        padding: 1rem;\n        margin-bottom: 0.75rem;\n        background: #fff;\n        cursor: pointer;\n        transition: background 0.2s;\n}\n.result-item[data-v-65ea378b]:hover {\n        background: #f9f9f9;\n}\n.result-header[data-v-65ea378b] {\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        margin-bottom: 0.25rem;\n}\n.name[data-v-65ea378b] {\n        font-weight: 600;\n        font-size: 1.1rem;\n}\n.number[data-v-65ea378b] {\n        color: #666;\n        font-size: 0.9rem;\n        margin-left: 0.5rem;\n}\n.badges[data-v-65ea378b] {\n        display: flex;\n        gap: 0.25rem;\n}\n.address[data-v-65ea378b] {\n        margin-bottom: 0.25rem;\n        color: #555;\n}\n.contact[data-v-65ea378b] {\n        font-size: 0.9rem;\n        color: #666;\n        margin-bottom: 0.25rem;\n}\n.labels[data-v-65ea378b] {\n        font-size: 0.9rem;\n        color: #444;\n        margin-bottom: 0.5rem;\n}\n.tags[data-v-65ea378b] {\n        display: flex;\n        flex-wrap: wrap;\n        gap: 0.5rem;\n}\n.tag[data-v-65ea378b] {\n        font-size: 0.8rem;\n        padding: 0.3rem 0.5rem;\n        border-radius: 4px;\n        background-color: #f0f0f0;\n}\n.tag.utr[data-v-65ea378b] {\n        background-color: #fef3c7;\n        border: 1px solid #facc15;\n}\n.tag.vat[data-v-65ea378b] {\n        background-color: #dbeafe;\n        border: 1px solid #3b82f6;\n}\n.tag.reg[data-v-65ea378b] {\n        background-color: #fee2e2;\n        border: 1px solid #ef4444;\n}\n";
+const _style_0 = "\n.client-search[data-v-7f29467c] {\n        width: 100%;\n        font-family: system-ui, sans-serif;\n}\ninput[data-v-7f29467c] {\n        padding: 0.75rem;\n        width: 100%;\n        font-size: 1rem;\n        border: 1px solid #ccc;\n        border-radius: 6px;\n        box-sizing: border-box;\n        margin-bottom: 1rem;\n}\n.results[data-v-7f29467c] {\n        list-style: none;\n        padding: 0;\n        margin: 0;\n}\n.result-item[data-v-7f29467c] {\n        border: 1px solid #eee;\n        border-radius: 8px;\n        padding: 1rem;\n        margin-bottom: 0.75rem;\n        background: #fff;\n        cursor: pointer;\n        transition: background 0.2s;\n}\n.result-item[data-v-7f29467c]:hover {\n        background: #f9f9f9;\n}\n.result-header[data-v-7f29467c] {\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        margin-bottom: 0.25rem;\n}\n.name[data-v-7f29467c] {\n        font-weight: 600;\n        font-size: 1.1rem;\n}\n.number[data-v-7f29467c] {\n        color: #666;\n        font-size: 0.9rem;\n        margin-left: 0.5rem;\n}\n.badges[data-v-7f29467c] {\n        display: flex;\n        gap: 0.25rem;\n}\n.address[data-v-7f29467c] {\n        margin-bottom: 0.25rem;\n        color: #555;\n}\n.contact[data-v-7f29467c] {\n        font-size: 0.9rem;\n        color: #666;\n        margin-bottom: 0.25rem;\n}\n.labels[data-v-7f29467c] {\n        font-size: 0.9rem;\n        color: #444;\n        margin-bottom: 0.5rem;\n}\n.tags[data-v-7f29467c] {\n        display: flex;\n        flex-wrap: wrap;\n        gap: 0.5rem;\n}\n.tag[data-v-7f29467c] {\n        font-size: 0.8rem;\n        padding: 0.3rem 0.5rem;\n        border-radius: 4px;\n        background-color: #f0f0f0;\n}\n.tag.utr[data-v-7f29467c] {\n        background-color: #fef3c7;\n        border: 1px solid #facc15;\n}\n.tag.vat[data-v-7f29467c] {\n        background-color: #dbeafe;\n        border: 1px solid #3b82f6;\n}\n.tag.reg[data-v-7f29467c] {\n        background-color: #fee2e2;\n        border: 1px solid #ef4444;\n}\n";
 
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
@@ -18306,7 +18306,7 @@ const _hoisted_14 = {
 
 
 const _sfc_main = {
-  __name: 'ClientSearch.ce',
+  __name: 'ClientSearch',
   props: {
         modelValue: String,
         results: Array,
@@ -18376,7 +18376,7 @@ return (_ctx, _cache) => {
 }
 
 };
-const ClientSearchComponent = /*#__PURE__*/_export_sfc(_sfc_main, [['styles',[_style_0]],['__scopeId',"data-v-65ea378b"]]);
+const ClientSearchComponent = /*#__PURE__*/_export_sfc(_sfc_main, [['styles',[_style_0]],['__scopeId',"data-v-7f29467c"]]);
 
 const ClientSearch = defineCustomElement(ClientSearchComponent);
 
