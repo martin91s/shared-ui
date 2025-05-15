@@ -1,13 +1,13 @@
-// src/stories/ClientSearch.stories.js
-import ClientSearch from '../components/ClientSearch.vue';
+// src/stories/ClientSearchCe.stories.js
+import ClientSearchCe from '../components/ClientSearch.ce.vue';
 
 export default {
     title: 'ClientSearch',
-    component: ClientSearch,
+    component: ClientSearchCe,
 };
 
 export const Default = () => ({
-    components: { ClientSearch },
+    components: { ClientSearch: ClientSearchCe },
     template: `
     <ClientSearch :results="results" @search-input="onInput" @selected="onSelect" />
   `,
@@ -30,7 +30,7 @@ export const Default = () => ({
 });
 
 export const DropdownVisible = () => ({
-    components: { ClientSearch },
+    components: { ClientSearch: ClientSearchCe },
     template: `
     <ClientSearch
       :results="results"
