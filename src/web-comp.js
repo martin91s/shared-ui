@@ -1,7 +1,7 @@
 import { defineCustomElement } from 'vue'
-import VueClientSearch from './components/ClientSearch.ce.vue'
+import ClientSearch from './components/ClientSearch.vue'
 
-const ClientSearch = defineCustomElement(VueClientSearch)
+const ClientSearch = defineCustomElement(ClientSearch)
 
 if (typeof window !== 'undefined') {
     customElements.define('client-search', ClientSearch)
