@@ -1,21 +1,30 @@
-// vite.config.js
+import { fileURLToPath, URL } from 'node:url'
+
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import path from 'path'
+import vueDevTools from 'vite-plugin-vue-devtools'
 
+// https://vite.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    vueDevTools(),
+  ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    },
+  },
   build: {
-    target: 'esnext',
     lib: {
-      entry: path.resolve(__dirname, 'src/web-components.js'),
-      formats: ['es'],
-      fileName: 'web-components',
+      entry: './src/web-comp.js',
+      format: ['es', 'cjs'],
+      name: 'vue-web-comp',
+      fileName: (format) => (format === 'es' ? 'index.js' : 'index.cjs.js'),
+
     },
-    rollupOptions: {
-      // ❌ REMOVE this: external: ['vue'],
-      // ✅ Ensure nothing is excluded so Vue is bundled in
-      external: [],
-    },
+    sourcemap: true,
+    target: 'esnext',
+    minify: false,
   },
 })
