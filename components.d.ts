@@ -8,8 +8,6 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    BBadge: typeof import('bootstrap-vue-next/components/BBadge')['BBadge']
-    BFormInput: typeof import('bootstrap-vue-next/components/BFormInput')['BFormInput']
     'ClientSearch.ce': typeof import('./src/components/ClientSearch.ce.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']

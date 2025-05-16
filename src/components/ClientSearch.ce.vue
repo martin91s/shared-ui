@@ -1,9 +1,10 @@
 <template>
     <div
         class="client-search">
-        <b-form-input
+        <input
             type="text"
-            v-model="inputValue"
+            :value="modelValue"
+            @input="$emit('update:modelValue', $event.target.value)"
             placeholder="Search clients..."
         />
         <ul v-if="results?.length" class="results">
@@ -37,9 +38,9 @@
                 </div>
 
                 <div class="tags">
-                    <b-badge v-if="result.utr" variant="primary">UTR: {{ result.utr }}</b-badge>
-                    <b-badge v-if="result.vat" variant="secondary">VAT: {{ result.vat }}</b-badge>
-                    <b-badge v-if="result.reg" variant="danger">REG: {{ result.reg }}</b-badge>
+                    <span v-if="result.utr" class="tag utr">UTR: {{ result.utr }}</span>
+                    <span v-if="result.vat" class="tag vat">VAT: {{ result.vat }}</span>
+                    <span v-if="result.reg" class="tag reg">REG: {{ result.reg }}</span>
                 </div>
             </li>
         </ul>
@@ -47,29 +48,11 @@
 </template>
 
 <script setup>
-    import { computed } from 'vue';
-
-    const props = defineProps({
-        modelValue: {
-            type: String,
-            default: '',
-        },
-        results: {
-            type: Array,
-            default: () => [],
-        },
+    defineProps({
+        modelValue: String,
+        results: Array,
     });
-
-    const emit = defineEmits(['update:modelValue', 'select']);
-
-    const inputValue = computed({
-        get() {
-            return props.modelValue;
-        },
-        set(value) {
-            emit('update:modelValue', value);
-        },
-    });
+    defineEmits(['update:modelValue', 'select']);
 </script>
 
 <style>

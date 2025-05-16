@@ -41,9 +41,9 @@
   const isFunction = (val) => typeof val === "function";
   const isString = (val) => typeof val === "string";
   const isSymbol = (val) => typeof val === "symbol";
-  const isObject$2 = (val) => val !== null && typeof val === "object";
+  const isObject = (val) => val !== null && typeof val === "object";
   const isPromise = (val) => {
-    return (isObject$2(val) || isFunction(val)) && isFunction(val.then) && isFunction(val.catch);
+    return (isObject(val) || isFunction(val)) && isFunction(val.then) && isFunction(val.catch);
   };
   const objectToString = Object.prototype.toString;
   const toTypeString = (value) => objectToString.call(value);
@@ -199,7 +199,7 @@
         }
       }
       return res;
-    } else if (isString(value) || isObject$2(value)) {
+    } else if (isString(value) || isObject(value)) {
       return value;
     }
   }
@@ -240,7 +240,7 @@
           res += normalized + " ";
         }
       }
-    } else if (isObject$2(value)) {
+    } else if (isObject(value)) {
       for (const name in value) {
         if (value[name]) {
           res += name + " ";
@@ -325,8 +325,8 @@
     if (aValidType || bValidType) {
       return aValidType && bValidType ? looseCompareArrays(a, b) : false;
     }
-    aValidType = isObject$2(a);
-    bValidType = isObject$2(b);
+    aValidType = isObject(a);
+    bValidType = isObject(b);
     if (aValidType || bValidType) {
       if (!aValidType || !bValidType) {
         return false;
@@ -354,7 +354,7 @@
     return !!(val && val["__v_isRef"] === true);
   };
   const toDisplayString = (val) => {
-    return isString(val) ? val : val == null ? "" : isArray(val) || isObject$2(val) && (val.toString === objectToString || !isFunction(val.toString)) ? isRef$1(val) ? toDisplayString(val.value) : JSON.stringify(val, replacer, 2) : String(val);
+    return isString(val) ? val : val == null ? "" : isArray(val) || isObject(val) && (val.toString === objectToString || !isFunction(val.toString)) ? isRef$1(val) ? toDisplayString(val.value) : JSON.stringify(val, replacer, 2) : String(val);
   };
   const replacer = (_key, val) => {
     if (isRef$1(val)) {
@@ -375,7 +375,7 @@
       };
     } else if (isSymbol(val)) {
       return stringifySymbol(val);
-    } else if (isObject$2(val) && !isArray(val) && !isPlainObject(val)) {
+    } else if (isObject(val) && !isArray(val) && !isPlainObject(val)) {
       return String(val);
     }
     return val;
@@ -1327,7 +1327,7 @@
       if (isRef(res)) {
         return targetIsArray && isIntegerKey(key) ? res : res.value;
       }
-      if (isObject$2(res)) {
+      if (isObject(res)) {
         return isReadonly2 ? readonly(res) : reactive(res);
       }
       return res;
@@ -1706,7 +1706,7 @@
     );
   }
   function createReactiveObject(target, isReadonly2, baseHandlers, collectionHandlers, proxyMap) {
-    if (!isObject$2(target)) {
+    if (!isObject(target)) {
       {
         warn$2(
           `value cannot be made ${isReadonly2 ? "readonly" : "reactive"}: ${String(
@@ -1759,8 +1759,8 @@
     }
     return value;
   }
-  const toReactive = (value) => isObject$2(value) ? reactive(value) : value;
-  const toReadonly = (value) => isObject$2(value) ? readonly(value) : value;
+  const toReactive = (value) => isObject(value) ? reactive(value) : value;
+  const toReadonly = (value) => isObject(value) ? readonly(value) : value;
 
   function isRef(r) {
     return r ? r["__v_isRef"] === true : false;
@@ -1912,7 +1912,7 @@
       return source;
     } else if (isFunction(source)) {
       return new GetterRefImpl(source);
-    } else if (isObject$2(source) && arguments.length > 1) {
+    } else if (isObject(source) && arguments.length > 1) {
       return propertyToRef(source, key, defaultValue);
     } else {
       return ref(source);
@@ -2200,7 +2200,7 @@
     return watchHandle;
   }
   function traverse(value, depth = Infinity, seen) {
-    if (depth <= 0 || !isObject$2(value) || value["__v_skip"]) {
+    if (depth <= 0 || !isObject(value) || value["__v_skip"]) {
       return value;
     }
     seen = seen || /* @__PURE__ */ new Set();
@@ -3378,7 +3378,7 @@
     name: `BaseTransition`,
     props: BaseTransitionPropsValidators,
     setup(props, { slots }) {
-      const instance = getCurrentInstance$1();
+      const instance = getCurrentInstance();
       const state = useTransitionState();
       return () => {
         const children = slots.default && getTransitionRawChildren(slots.default(), true);
@@ -3700,8 +3700,8 @@
     ) : options;
   }
 
-  function useId$1() {
-    const i = getCurrentInstance$1();
+  function useId() {
+    const i = getCurrentInstance();
     if (i) {
       return (i.appContext.config.idPrefix || "v") + "-" + i.ids[0] + i.ids[1]++;
     } else {
@@ -3717,7 +3717,7 @@
 
   const knownTemplateRefs = /* @__PURE__ */ new WeakSet();
   function useTemplateRef(key) {
-    const i = getCurrentInstance$1();
+    const i = getCurrentInstance();
     const r = shallowRef(null);
     if (i) {
       const refs = i.refs === EMPTY_OBJ ? i.refs = {} : i.refs;
@@ -4624,7 +4624,7 @@ Server rendered element contains fewer child nodes than client vdom.`
         if (comp && (comp.__esModule || comp[Symbol.toStringTag] === "Module")) {
           comp = comp.default;
         }
-        if (comp && !isObject$2(comp) && !isFunction(comp)) {
+        if (comp && !isObject(comp) && !isFunction(comp)) {
           throw new Error(`Invalid async component load result: ${comp}`);
         }
         resolvedComp = comp;
@@ -4742,7 +4742,7 @@ Server rendered element contains fewer child nodes than client vdom.`
       max: [String, Number]
     },
     setup(props, { slots }) {
-      const instance = getCurrentInstance$1();
+      const instance = getCurrentInstance();
       const sharedContext = instance.ctx;
       if (!sharedContext.renderer) {
         return () => {
@@ -5128,7 +5128,7 @@ If this is a native custom element, make sure to exclude it from component resol
       for (let i = 0; i < source; i++) {
         ret[i] = renderItem(i + 1, i, void 0, cached && cached[i]);
       }
-    } else if (isObject$2(source)) {
+    } else if (isObject(source)) {
       if (source[Symbol.iterator]) {
         ret = Array.from(
           source,
@@ -5223,7 +5223,7 @@ If this is a native custom element, make sure to exclude it from component resol
 
   function toHandlers(obj, preserveCaseIfNecessary) {
     const ret = {};
-    if (!isObject$2(obj)) {
+    if (!isObject(obj)) {
       warn$1(`v-on with no argument expects an object value.`);
       return ret;
     }
@@ -5528,7 +5528,7 @@ If this is a native custom element, make sure to exclude it from component resol
     return getContext().attrs;
   }
   function getContext() {
-    const i = getCurrentInstance$1();
+    const i = getCurrentInstance();
     if (!i) {
       warn$1(`useContext() called without active instance.`);
     }
@@ -5580,7 +5580,7 @@ If this is a native custom element, make sure to exclude it from component resol
     return ret;
   }
   function withAsyncContext(getAwaitable) {
-    const ctx = getCurrentInstance$1();
+    const ctx = getCurrentInstance();
     if (!ctx) {
       warn$1(
         `withAsyncContext called without active current instance. This is likely a bug.`
@@ -5695,7 +5695,7 @@ If this is a native custom element, make sure to exclude it from component resol
           `data() returned a Promise - note data() cannot be async; If you intend to perform data fetching before component renders, use async setup() + <Suspense>.`
         );
       }
-      if (!isObject$2(data)) {
+      if (!isObject(data)) {
         warn$1(`data() should return an object.`);
       } else {
         instance.data = reactive(data);
@@ -5807,7 +5807,7 @@ If this is a native custom element, make sure to exclude it from component resol
     for (const key in injectOptions) {
       const opt = injectOptions[key];
       let injected;
-      if (isObject$2(opt)) {
+      if (isObject(opt)) {
         if ("default" in opt) {
           injected = inject(
             opt.from || key,
@@ -5857,7 +5857,7 @@ If this is a native custom element, make sure to exclude it from component resol
       {
         watch(getter, raw.bind(publicThis));
       }
-    } else if (isObject$2(raw)) {
+    } else if (isObject(raw)) {
       if (isArray(raw)) {
         raw.forEach((r) => createWatcher(r, ctx, publicThis, key));
       } else {
@@ -5897,7 +5897,7 @@ If this is a native custom element, make sure to exclude it from component resol
       }
       mergeOptions(resolved, base, optionMergeStrategies);
     }
-    if (isObject$2(base)) {
+    if (isObject(base)) {
       cache.set(base, resolved);
     }
     return resolved;
@@ -6039,7 +6039,7 @@ If this is a native custom element, make sure to exclude it from component resol
       if (!isFunction(rootComponent)) {
         rootComponent = extend({}, rootComponent);
       }
-      if (rootProps != null && !isObject$2(rootProps)) {
+      if (rootProps != null && !isObject(rootProps)) {
         warn$1(`root props passed to app.mount() must be an object.`);
         rootProps = null;
       }
@@ -6475,7 +6475,7 @@ If you want to remount the same app, move your app creation logic into a factory
       }
     }
     if (!raw && !hasExtends) {
-      if (isObject$2(comp)) {
+      if (isObject(comp)) {
         cache.set(comp, EMPTY_ARR);
       }
       return EMPTY_ARR;
@@ -6491,7 +6491,7 @@ If you want to remount the same app, move your app creation logic into a factory
         }
       }
     } else if (raw) {
-      if (!isObject$2(raw)) {
+      if (!isObject(raw)) {
         warn$1(`invalid props options`, raw);
       }
       for (const key in raw) {
@@ -6525,7 +6525,7 @@ If you want to remount the same app, move your app creation logic into a factory
       }
     }
     const res = [normalized, needCastKeys];
-    if (isObject$2(comp)) {
+    if (isObject(comp)) {
       cache.set(comp, res);
     }
     return res;
@@ -6608,7 +6608,7 @@ If you want to remount the same app, move your app creation logic into a factory
         valid = value instanceof type;
       }
     } else if (expectedType === "Object") {
-      valid = isObject$2(value);
+      valid = isObject(value);
     } else if (expectedType === "Array") {
       valid = isArray(value);
     } else {
@@ -8449,7 +8449,7 @@ If you want to remount the same app, move your app creation logic into a factory
   }
 
   function useModel(props, name, options = EMPTY_OBJ) {
-    const i = getCurrentInstance$1();
+    const i = getCurrentInstance();
     if (!i) {
       warn$1(`useModel() called without active instance.`);
       return ref();
@@ -8628,7 +8628,7 @@ If you want to remount the same app, move your app creation logic into a factory
       }
     }
     if (!raw && !hasExtends) {
-      if (isObject$2(comp)) {
+      if (isObject(comp)) {
         cache.set(comp, null);
       }
       return null;
@@ -8638,7 +8638,7 @@ If you want to remount the same app, move your app creation logic into a factory
     } else {
       extend(normalized, raw);
     }
-    if (isObject$2(comp)) {
+    if (isObject(comp)) {
       cache.set(comp, normalized);
     }
     return normalized;
@@ -9712,14 +9712,14 @@ If you want to remount the same app, move your app creation logic into a factory
       if (klass && !isString(klass)) {
         props.class = normalizeClass(klass);
       }
-      if (isObject$2(style)) {
+      if (isObject(style)) {
         if (isProxy(style) && !isArray(style)) {
           style = extend({}, style);
         }
         props.style = normalizeStyle(style);
       }
     }
-    const shapeFlag = isString(type) ? 1 : isSuspense(type) ? 128 : isTeleport(type) ? 64 : isObject$2(type) ? 4 : isFunction(type) ? 2 : 0;
+    const shapeFlag = isString(type) ? 1 : isSuspense(type) ? 128 : isTeleport(type) ? 64 : isObject(type) ? 4 : isFunction(type) ? 2 : 0;
     if (shapeFlag & 4 && isProxy(type)) {
       type = toRaw(type);
       warn$1(
@@ -10003,7 +10003,7 @@ Component that was made reactive: `,
     return instance;
   }
   let currentInstance = null;
-  const getCurrentInstance$1 = () => currentInstance || currentRenderingInstance;
+  const getCurrentInstance = () => currentInstance || currentRenderingInstance;
   let internalSetCurrentInstance;
   let setInSSRSetupState;
   {
@@ -10142,7 +10142,7 @@ Component that was made reactive: `,
       } else {
         instance.render = setupResult;
       }
-    } else if (isObject$2(setupResult)) {
+    } else if (isObject(setupResult)) {
       if (isVNode(setupResult)) {
         warn$1(
           `setup() should not return VNodes directly - return a render function instead.`
@@ -10341,7 +10341,7 @@ Component that was made reactive: `,
   const computed = (getterOrOptions, debugOptions) => {
     const c = computed$1(getterOrOptions, debugOptions, isInSSRComponentSetup);
     {
-      const i = getCurrentInstance$1();
+      const i = getCurrentInstance();
       if (i && i.appContext.config.warnRecursiveComputed) {
         c._warnRecursive = true;
       }
@@ -10352,7 +10352,7 @@ Component that was made reactive: `,
   function h(type, propsOrChildren, children) {
     const l = arguments.length;
     if (l === 2) {
-      if (isObject$2(propsOrChildren) && !isArray(propsOrChildren)) {
+      if (isObject(propsOrChildren) && !isArray(propsOrChildren)) {
         if (isVNode(propsOrChildren)) {
           return createVNode(type, null, [propsOrChildren]);
         }
@@ -10381,7 +10381,7 @@ Component that was made reactive: `,
     const formatter = {
       __vue_custom_formatter: true,
       header(obj) {
-        if (!isObject$2(obj)) {
+        if (!isObject(obj)) {
           return null;
         }
         if (obj.__isVue) {
@@ -10503,7 +10503,7 @@ Component that was made reactive: `,
         return ["span", stringStyle, JSON.stringify(v)];
       } else if (typeof v === "boolean") {
         return ["span", keywordStyle, v];
-      } else if (isObject$2(v)) {
+      } else if (isObject(v)) {
         return ["object", { object: asRaw ? toRaw(v) : v }];
       } else {
         return ["span", stringStyle, String(v)];
@@ -10524,7 +10524,7 @@ Component that was made reactive: `,
     }
     function isKeyOfType(Comp, key, type) {
       const opts = Comp[type];
-      if (isArray(opts) && opts.includes(key) || isObject$2(opts) && key in opts) {
+      if (isArray(opts) && opts.includes(key) || isObject(opts) && key in opts) {
         return true;
       }
       if (Comp.extends && isKeyOfType(Comp.extends, key, type)) {
@@ -10840,7 +10840,7 @@ Component that was made reactive: `,
   function normalizeDuration(duration) {
     if (duration == null) {
       return null;
-    } else if (isObject$2(duration)) {
+    } else if (isObject(duration)) {
       return [NumberOf(duration.enter), NumberOf(duration.leave)];
     } else {
       const n = NumberOf(duration);
@@ -11026,7 +11026,7 @@ Component that was made reactive: `,
 
   const CSS_VAR_TEXT = Symbol("CSS_VAR_TEXT" );
   function useCssVars(getter) {
-    const instance = getCurrentInstance$1();
+    const instance = getCurrentInstance();
     if (!instance) {
       warn(`useCssVars is called without current active component instance.`);
       return;
@@ -11811,7 +11811,7 @@ Expected function or array of functions, received type ${typeof value}.`
     }
   }
   function useHost(caller) {
-    const instance = getCurrentInstance$1();
+    const instance = getCurrentInstance();
     const el = instance && instance.ce;
     if (el) {
       return el;
@@ -11835,7 +11835,7 @@ Expected function or array of functions, received type ${typeof value}.`
 
   function useCssModule(name = "$style") {
     {
-      const instance = getCurrentInstance$1();
+      const instance = getCurrentInstance();
       if (!instance) {
         warn(`useCssModule must be called inside setup()`);
         return EMPTY_OBJ;
@@ -11869,7 +11869,7 @@ Expected function or array of functions, received type ${typeof value}.`
       moveClass: String
     }),
     setup(props, { slots }) {
-      const instance = getCurrentInstance$1();
+      const instance = getCurrentInstance();
       const state = useTransitionState();
       let prevChildren;
       let children;
@@ -12506,7 +12506,7 @@ Expected function or array of functions, received type ${typeof value}.`
     devtools: devtools,
     effect: effect,
     effectScope: effectScope,
-    getCurrentInstance: getCurrentInstance$1,
+    getCurrentInstance: getCurrentInstance,
     getCurrentScope: getCurrentScope,
     getCurrentWatcher: getCurrentWatcher,
     getTransitionRawChildren: getTransitionRawChildren,
@@ -12593,7 +12593,7 @@ Expected function or array of functions, received type ${typeof value}.`
     useCssModule: useCssModule,
     useCssVars: useCssVars,
     useHost: useHost,
-    useId: useId$1,
+    useId: useId,
     useModel: useModel,
     useSSRContext: useSSRContext,
     useShadowRoot: useShadowRoot,
@@ -16675,7 +16675,7 @@ Use a v-bind binding combined with a v-on listener that emits update:x event ins
       const { tag, props } = node;
       const isComponent = node.tagType === 1;
       let vnodeTag = isComponent ? resolveComponentType(node, context) : `"${tag}"`;
-      const isDynamicComponent = isObject$2(vnodeTag) && vnodeTag.callee === RESOLVE_DYNAMIC_COMPONENT;
+      const isDynamicComponent = isObject(vnodeTag) && vnodeTag.callee === RESOLVE_DYNAMIC_COMPONENT;
       let vnodeProps;
       let vnodeChildren;
       let patchFlag = 0;
@@ -18272,913 +18272,6 @@ ${codeFrame}` : message);
   }
   registerRuntimeCompiler(compileToFunction);
 
-  const genericBvnPrefix = "BootstrapVueNext__";
-  const withBvnPrefix = (value, suffix = "") => {
-    const suffixWithTrail = `${suffix}___`;
-    return `${genericBvnPrefix}ID__${value}__${suffix ? suffixWithTrail : ""}`;
-  };
-  const createBvnInjectionKey = (name) => withBvnPrefix(name);
-  const createBvnPluginInjectionKey = (name) => withBvnPrefix(`${name}__plugin`);
-  const collapseInjectionKey = createBvnInjectionKey("collapse");
-  const navbarInjectionKey = createBvnInjectionKey("navbar");
-  const defaultsKey = createBvnPluginInjectionKey("defaults");
-  const formGroupPluginKey = createBvnInjectionKey("formGroupPlugin");
-
-  function injectSelf(key, vm = getCurrentInstance("injectSelf")) {
-    const { provides } = vm;
-    if (provides && key in provides) {
-      return provides[key];
-    }
-    return void 0;
-  }
-  function getCurrentInstance(name, message) {
-    const vm = getCurrentInstance$1();
-    if (!vm) {
-      throw new Error(`[Bvn] ${name} ${"must be called from inside a setup function"}`);
-    }
-    return vm;
-  }
-  const toKebabCase = (str = "") => str.replace(/[^a-z]/gi, "-").replace(/\B([A-Z])/g, "-$1").toLowerCase();
-  const isObject$1 = (obj) => obj !== null && typeof obj === "object" && !Array.isArray(obj);
-  function mergeDeep(source = {}, target = {}, arrayFn) {
-    const out = {};
-    for (const key in source) {
-      out[key] = source[key];
-    }
-    for (const key in target) {
-      const sourceProperty = source[key];
-      const targetProperty = target[key];
-      if (isObject$1(sourceProperty) && isObject$1(targetProperty)) {
-        out[key] = mergeDeep(sourceProperty, targetProperty);
-        continue;
-      }
-      out[key] = targetProperty;
-    }
-    return out;
-  }
-  const propIsDefined = (vnode, prop) => {
-    var _a, _b;
-    return typeof ((_a = vnode.props) == null ? void 0 : _a[prop]) !== "undefined" || typeof ((_b = vnode.props) == null ? void 0 : _b[toKebabCase(prop)]) !== "undefined";
-  };
-  function internalUseDefaults(props = {}, name) {
-    const defaults = inject(defaultsKey, ref({}));
-    const vm = getCurrentInstance("useDefaults");
-    name = name ?? vm.type.name ?? vm.type.__name;
-    if (!name) {
-      throw new Error("[Bvn] Could not determine component name");
-    }
-    const componentDefaults = computed(() => {
-      var _a;
-      return (_a = defaults.value) == null ? void 0 : _a[props._as ?? name];
-    });
-    const _props = new Proxy(props, {
-      get(target, prop) {
-        var _a, _b, _c, _d;
-        const propValue = Reflect.get(target, prop);
-        if (prop === "class" || prop === "style") {
-          return [(_a = componentDefaults.value) == null ? void 0 : _a[prop], propValue].filter((v) => v != null);
-        } else if (typeof prop === "string" && !propIsDefined(vm.vnode, prop)) {
-          return ((_b = componentDefaults.value) == null ? void 0 : _b[prop]) ?? ((_d = (_c = defaults.value) == null ? void 0 : _c.global) == null ? void 0 : _d[prop]) ?? propValue;
-        }
-        return propValue;
-      }
-    });
-    const _subcomponentDefaults = shallowRef();
-    watchEffect(() => {
-      if (componentDefaults.value) {
-        const subComponents = Object.entries(componentDefaults.value).filter(
-          ([key]) => key.startsWith(key[0].toUpperCase())
-        );
-        _subcomponentDefaults.value = subComponents.length ? Object.fromEntries(subComponents) : void 0;
-      } else {
-        _subcomponentDefaults.value = void 0;
-      }
-    });
-    function provideSubDefaults() {
-      const injected = injectSelf(defaultsKey, vm);
-      provide(
-        defaultsKey,
-        computed(
-          () => _subcomponentDefaults.value ? mergeDeep((injected == null ? void 0 : injected.value) ?? {}, _subcomponentDefaults.value) : injected == null ? void 0 : injected.value
-        )
-      );
-    }
-    return { props: _props, provideSubDefaults };
-  }
-  function useDefaults(props, name) {
-    const { props: _props, provideSubDefaults } = internalUseDefaults(props, name);
-    provideSubDefaults();
-    return _props;
-  }
-
-  const pick = (objToPluck, keysToPluck) => [...keysToPluck].reduce(
-    (memo, prop) => {
-      memo[prop] = objToPluck[prop];
-      return memo;
-    },
-    {}
-  );
-
-  const toPascalCase = (str) => str.replace(/-./g, (match) => match.charAt(1).toUpperCase()).replace(/\b\w/g, (match) => match.toUpperCase()).replace(/\s+/g, "");
-
-  const isLink = (props) => !!(props.href || props.to);
-  const useBLinkHelper = (props, pickProps) => {
-    const pickPropsResolved = readonly(toRef(pickProps));
-    const resolvedProps = readonly(toRef(props));
-    const computedLink = computed(() => isLink(resolvedProps.value));
-    const computedLinkProps = computed(
-      () => computedLink.value ? pick(
-        resolvedProps.value,
-        pickPropsResolved.value ?? [
-          "active",
-          "activeClass",
-          "append",
-          "href",
-          "rel",
-          "replace",
-          "routerComponentName",
-          "target",
-          "to",
-          "variant",
-          "opacity",
-          "opacityHover",
-          "underlineVariant",
-          "underlineOffset",
-          "underlineOffsetHover",
-          "underlineOpacity",
-          "underlineOpacityHover"
-        ]
-      ) : {}
-    );
-    return { computedLink, computedLinkProps };
-  };
-  const useBLinkTagResolver = (props) => {
-    const instance = getCurrentInstance$1();
-    const router = instance == null ? void 0 : instance.appContext.app.config.globalProperties.$router;
-    const route = instance == null ? void 0 : instance.appContext.app.config.globalProperties.$route;
-    const RouterLinkComponent = resolveDynamicComponent("RouterLink");
-    const useLink = typeof RouterLinkComponent === "string" ? null : RouterLinkComponent.useLink;
-    const resolvedProps = toRef(props);
-    const resolvedTo = toRef(() => resolvedProps.value.to || "");
-    const resolvedReplace = toRef(() => resolvedProps.value.replace);
-    const routerName = computed(() => toPascalCase(resolvedProps.value.routerComponentName));
-    const tag = computed(() => {
-      const hasRouter = (instance == null ? void 0 : instance.appContext.app.component(routerName.value)) !== void 0;
-      if (!hasRouter || resolvedProps.value.disabled || !resolvedProps.value.to) {
-        return "a";
-      }
-      return routerName.value;
-    });
-    const isRouterLink = computed(() => tag.value === "RouterLink");
-    const isNuxtLink = computed(
-      // @ts-expect-error we're doing an explicit check for Nuxt, so we can safely ignore this
-      () => isRouterLink.value && typeof (instance == null ? void 0 : instance.appContext.app.$nuxt) !== "undefined"
-    );
-    const isNonStandardTag = computed(
-      () => tag.value !== "a" && !isRouterLink.value && !isNuxtLink.value
-    );
-    const isOfRouterType = computed(() => isRouterLink.value || isNuxtLink.value);
-    const linkProps = computed(() => ({
-      to: resolvedTo.value,
-      replace: resolvedReplace.value
-    }));
-    const _link = useLink == null ? void 0 : useLink({
-      to: resolvedTo,
-      replace: resolvedReplace
-    });
-    const link = computed(() => isOfRouterType.value ? _link : null);
-    const computedHref = computed(() => {
-      var _a;
-      if ((_a = link.value) == null ? void 0 : _a.href.value) return link.value.href.value;
-      const toFallback = "#";
-      if (resolvedProps.value.href) return resolvedProps.value.href;
-      if (typeof resolvedProps.value.to === "string") return resolvedProps.value.to || toFallback;
-      const { to: stableTo } = resolvedProps.value;
-      if (stableTo !== void 0 && "path" in stableTo) {
-        const path = stableTo.path || "";
-        const query = stableTo.query ? `?${Object.keys(stableTo.query).map((e) => {
-        var _a2;
-        return `${e}=${(_a2 = stableTo.query) == null ? void 0 : _a2[e]}`;
-      }).join("=")}` : "";
-        const hash = !stableTo.hash || stableTo.hash.charAt(0) === "#" ? stableTo.hash || "" : `#${stableTo.hash}`;
-        return `${path}${query}${hash}` || toFallback;
-      }
-      return toFallback;
-    });
-    return {
-      isNonStandardTag,
-      tag,
-      isRouterLink,
-      isNuxtLink,
-      computedHref,
-      routerName,
-      router,
-      route,
-      link,
-      linkProps
-    };
-  };
-  const useLinkClasses = (linkProps) => computed(() => {
-    const props = toValue(linkProps);
-    return {
-      [`link-${props.variant}`]: props.variant !== null,
-      [`link-opacity-${props.opacity}`]: props.opacity !== void 0,
-      [`link-opacity-${props.opacityHover}-hover`]: props.opacityHover !== void 0,
-      [`link-underline-${props.underlineVariant}`]: props.underlineVariant !== null,
-      [`link-offset-${props.underlineOffset}`]: props.underlineOffset !== void 0,
-      [`link-offset-${props.underlineOffsetHover}-hover`]: props.underlineOffsetHover !== void 0,
-      ["link-underline"]: props.underlineVariant === null && (props.underlineOpacity !== void 0 || props.underlineOpacityHover !== void 0),
-      [`link-underline-opacity-${props.underlineOpacity}`]: props.underlineOpacity !== void 0,
-      [`link-underline-opacity-${props.underlineOpacityHover}-hover`]: props.underlineOpacityHover !== void 0,
-      "icon-link": props.icon === true
-    };
-  });
-  const defaultActiveClass = "active";
-  const _sfc_main$4 = /* @__PURE__ */ defineComponent({
-    __name: "BLink",
-    props: {
-      active: { type: Boolean, default: void 0 },
-      activeClass: { default: "router-link-active" },
-      disabled: { type: Boolean, default: false },
-      exactActiveClass: { default: "router-link-exact-active" },
-      href: { default: void 0 },
-      icon: { type: Boolean, default: false },
-      noRel: { type: Boolean, default: false },
-      opacity: { default: void 0 },
-      opacityHover: { default: void 0 },
-      prefetch: { type: Boolean, default: void 0 },
-      prefetchOn: { default: void 0 },
-      noPrefetch: { type: Boolean, default: void 0 },
-      prefetchedClass: { default: void 0 },
-      rel: { default: void 0 },
-      replace: { type: Boolean, default: false },
-      routerComponentName: { default: "router-link" },
-      routerTag: { default: "a" },
-      stretched: { type: Boolean, default: false },
-      target: { default: void 0 },
-      to: { default: void 0 },
-      underlineOffset: { default: void 0 },
-      underlineOffsetHover: { default: void 0 },
-      underlineOpacity: { default: void 0 },
-      underlineOpacityHover: { default: void 0 },
-      underlineVariant: { default: null },
-      variant: { default: null }
-    },
-    emits: ["click"],
-    setup(__props, { emit: __emit }) {
-      const _props = __props;
-      const props = useDefaults(_props, "BLink");
-      const emit = __emit;
-      const attrs = useAttrs();
-      const { computedHref, tag, link, isNuxtLink, isRouterLink, linkProps, isNonStandardTag } = useBLinkTagResolver(
-        computed(() => ({
-          routerComponentName: props.routerComponentName,
-          disabled: props.disabled,
-          to: props.to,
-          replace: props.replace,
-          href: props.href
-        }))
-      );
-      const collapseData = inject(collapseInjectionKey, null);
-      const navbarData = inject(navbarInjectionKey, null);
-      const linkValueClasses = useLinkClasses(props);
-      const computedClasses = computed(() => {
-        var _a, _b;
-        return [
-          linkValueClasses.value,
-          attrs.class,
-          computedLinkClasses.value,
-          {
-            [defaultActiveClass]: props.active,
-            [props.activeClass]: ((_a = link.value) == null ? void 0 : _a.isActive.value) || false,
-            [props.exactActiveClass]: ((_b = link.value) == null ? void 0 : _b.isExactActive.value) || false,
-            "stretched-link": props.stretched === true
-          }
-        ];
-      });
-      const computedLinkClasses = computed(() => ({
-        [defaultActiveClass]: props.active,
-        disabled: props.disabled
-      }));
-      const clicked = (e) => {
-        var _a, _b, _c;
-        if (props.disabled) {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          return;
-        }
-        if (((_a = collapseData == null ? void 0 : collapseData.isNav) == null ? void 0 : _a.value) === true && navbarData === null || navbarData !== null && ((_b = navbarData.autoClose) == null ? void 0 : _b.value) === true) {
-          (_c = collapseData == null ? void 0 : collapseData.hide) == null ? void 0 : _c.call(collapseData);
-        }
-        emit("click", e);
-      };
-      const computedRel = computed(
-        () => props.target === "_blank" ? !props.rel && props.noRel ? "noopener" : props.rel : void 0
-      );
-      const computedTabIndex = computed(
-        () => props.disabled ? "-1" : typeof attrs.tabindex === "undefined" ? null : attrs.tabindex
-      );
-      const nuxtSpecificProps = computed(() => ({
-        prefetch: props.prefetch,
-        noPrefetch: props.noPrefetch,
-        prefetchOn: props.prefetchOn,
-        prefetchedClass: props.prefetchedClass,
-        ...linkProps.value
-      }));
-      const computedSpecificProps = computed(() => ({
-        ...isRouterLink.value ? linkProps.value : void 0,
-        // In addition to being Nuxt specific, we add these values if it's some non-standard tag. We don't know what it is,
-        // So we just add it anyways. It will be made as an attr if it's unused so it's fine
-        ...isNuxtLink.value || isNonStandardTag.value ? nuxtSpecificProps.value : void 0
-      }));
-      return (_ctx, _cache) => {
-        return openBlock(), createBlock(resolveDynamicComponent(unref(tag)), mergeProps({
-          class: computedClasses.value,
-          target: unref(props).target,
-          href: unref(computedHref),
-          rel: computedRel.value,
-          tabindex: computedTabIndex.value,
-          "aria-disabled": unref(props).disabled ? true : null
-        }, computedSpecificProps.value, {
-          onClick: _cache[0] || (_cache[0] = (e) => {
-            var _a;
-            clicked(e);
-            (_a = unref(link)) == null ? void 0 : _a.navigate(e);
-          })
-        }), {
-          default: withCtx(() => [
-            renderSlot(_ctx.$slots, "default")
-          ]),
-          _: 3
-        }, 16, ["class", "target", "href", "rel", "tabindex", "aria-disabled"]);
-      };
-    }
-  });
-
-  const useColorVariantClasses = (obj) => computed(() => {
-    let props = toValue(obj);
-    props = {
-      variant: props.variant ?? null,
-      bgVariant: props.bgVariant ?? null,
-      textVariant: props.textVariant ?? null,
-      borderVariant: props.borderVariant ?? null
-    };
-    return {
-      [`text-bg-${props.variant}`]: props.variant !== null,
-      [`text-${props.textVariant}`]: props.textVariant !== null,
-      [`bg-${props.bgVariant}`]: props.bgVariant !== null,
-      [`border-${props.borderVariant}`]: props.borderVariant !== null
-    };
-  });
-
-  const _sfc_main$3 = defineComponent({
-    name: "ConditionalWrapper",
-    inheritAttrs: false,
-    props: {
-      tag: {
-        type: String,
-        default: "div"
-      },
-      skip: {
-        type: Boolean,
-        required: true
-      }
-    },
-    slots: Object,
-    setup(props, { slots, attrs }) {
-      return () => {
-        var _a, _b;
-        return props.skip ? (_a = slots.default) == null ? void 0 : _a.call(slots, {}) : h(props.tag, { ...attrs }, [(_b = slots.default) == null ? void 0 : _b.call(slots, {})]);
-      };
-    }
-  });
-
-  const _sfc_main$2 = /* @__PURE__ */ defineComponent({
-    __name: "BBadge",
-    props: {
-      dotIndicator: { type: Boolean, default: false },
-      pill: { type: Boolean, default: false },
-      placement: { default: void 0 },
-      tag: { default: "span" },
-      active: { type: Boolean, default: void 0 },
-      activeClass: { default: void 0 },
-      disabled: { type: Boolean, default: void 0 },
-      exactActiveClass: { default: void 0 },
-      href: { default: void 0 },
-      icon: { type: Boolean, default: void 0 },
-      noRel: { type: Boolean },
-      opacity: { default: void 0 },
-      opacityHover: { default: void 0 },
-      prefetch: { type: Boolean },
-      prefetchOn: {},
-      noPrefetch: { type: Boolean },
-      prefetchedClass: {},
-      rel: { default: void 0 },
-      replace: { type: Boolean, default: void 0 },
-      routerComponentName: { default: void 0 },
-      stretched: { type: Boolean, default: false },
-      target: { default: void 0 },
-      to: { default: void 0 },
-      underlineOffset: { default: void 0 },
-      underlineOffsetHover: { default: void 0 },
-      underlineOpacity: { default: void 0 },
-      underlineOpacityHover: { default: void 0 },
-      underlineVariant: { default: void 0 },
-      variant: { default: "secondary" },
-      bgVariant: { default: null },
-      textVariant: { default: null }
-    },
-    setup(__props) {
-      const _props = __props;
-      const props = useDefaults(_props, "BBadge");
-      const { computedLink, computedLinkProps } = useBLinkHelper(props, [
-        "active",
-        "activeClass",
-        "append",
-        "disabled",
-        "href",
-        "rel",
-        "replace",
-        "routerComponentName",
-        "target",
-        "to",
-        "opacity",
-        "opacityHover",
-        "underlineVariant",
-        "underlineOffset",
-        "underlineOffsetHover",
-        "underlineOpacity",
-        "underlineOpacityHover",
-        "icon"
-      ]);
-      const computedTag = computed(() => computedLink.value ? _sfc_main$4 : props.tag);
-      const placementClasses = computed(() => {
-        const pos = props.placement ?? (props.dotIndicator ? "top-end" : void 0);
-        return [
-          "position-absolute",
-          "translate-middle",
-          {
-            "start-0 top-0": pos === "top-start",
-            "start-0 top-50": pos === "start",
-            "start-0 top-100": pos === "bottom-start",
-            "start-50 top-0": pos === "top",
-            "start-50 top-100": pos === "bottom",
-            "start-100 top-0": pos === "top-end",
-            "start-100 top-50": pos === "end",
-            "start-100 top-100": pos === "bottom-end"
-          }
-        ];
-      });
-      const colorClasses = useColorVariantClasses(props);
-      const computedClasses = computed(() => [
-        colorClasses.value,
-        props.placement !== void 0 || props.dotIndicator === true ? placementClasses.value : void 0,
-        {
-          "active": props.active,
-          "disabled": props.disabled,
-          "rounded-pill": props.pill,
-          "p-2 border border-light rounded-circle": props.dotIndicator,
-          "text-decoration-none": computedLink.value
-        }
-      ]);
-      return (_ctx, _cache) => {
-        return openBlock(), createBlock(resolveDynamicComponent(computedTag.value), mergeProps({
-          class: ["badge", computedClasses.value]
-        }, unref(computedLinkProps)), {
-          default: withCtx(() => [
-            createVNode(_sfc_main$3, mergeProps({
-              skip: unref(props).dotIndicator !== true,
-              tag: "span"
-            }, unref(props).dotIndicator ? { class: "visually-hidden" } : {}), {
-              default: withCtx(() => [
-                renderSlot(_ctx.$slots, "default")
-              ]),
-              _: 3
-            }, 16, ["skip"])
-          ]),
-          _: 3
-        }, 16, ["class"]);
-      };
-    }
-  });
-
-  const useAriaInvalid = (ariaInvalid, state) => computed(() => {
-    const resolvedAriaInvalid = toValue(ariaInvalid);
-    const resolvedState = toValue(state);
-    const resolvedAriaInvalidValue = resolvedAriaInvalid === true ? "true" : typeof resolvedAriaInvalid === "string" ? resolvedAriaInvalid : resolvedState === false ? "true" : resolvedAriaInvalid === false ? "false" : void 0;
-    return resolvedAriaInvalidValue;
-  });
-
-  const useId = (id, suffix) => {
-    const genId = useId$1();
-    return computed(() => toValue(id) || withBvnPrefix(genId || "", suffix));
-  };
-
-  function tryOnScopeDispose(fn) {
-    if (getCurrentScope()) {
-      onScopeDispose(fn);
-      return true;
-    }
-    return false;
-  }
-  const isClient = typeof window !== "undefined" && typeof document !== "undefined";
-  typeof WorkerGlobalScope !== "undefined" && globalThis instanceof WorkerGlobalScope;
-  const toString = Object.prototype.toString;
-  const isObject = (val) => toString.call(val) === "[object Object]";
-  const noop = () => {
-  };
-  function createFilterWrapper(filter, fn) {
-    function wrapper(...args) {
-      return new Promise((resolve, reject) => {
-        Promise.resolve(filter(() => fn.apply(this, args), { fn, thisArg: this, args })).then(resolve).catch(reject);
-      });
-    }
-    return wrapper;
-  }
-  function debounceFilter(ms, options = {}) {
-    let timer;
-    let maxTimer;
-    let lastRejector = noop;
-    const _clearTimeout = (timer2) => {
-      clearTimeout(timer2);
-      lastRejector();
-      lastRejector = noop;
-    };
-    let lastInvoker;
-    const filter = (invoke) => {
-      const duration = toValue(ms);
-      const maxDuration = toValue(options.maxWait);
-      if (timer)
-        _clearTimeout(timer);
-      if (duration <= 0 || maxDuration !== void 0 && maxDuration <= 0) {
-        if (maxTimer) {
-          _clearTimeout(maxTimer);
-          maxTimer = null;
-        }
-        return Promise.resolve(invoke());
-      }
-      return new Promise((resolve, reject) => {
-        lastRejector = options.rejectOnCancel ? reject : resolve;
-        lastInvoker = invoke;
-        if (maxDuration && !maxTimer) {
-          maxTimer = setTimeout(() => {
-            if (timer)
-              _clearTimeout(timer);
-            maxTimer = null;
-            resolve(lastInvoker());
-          }, maxDuration);
-        }
-        timer = setTimeout(() => {
-          if (maxTimer)
-            _clearTimeout(maxTimer);
-          maxTimer = null;
-          resolve(invoke());
-        }, duration);
-      });
-    };
-    return filter;
-  }
-  function toArray(value) {
-    return Array.isArray(value) ? value : [value];
-  }
-  function useDebounceFn(fn, ms = 200, options = {}) {
-    return createFilterWrapper(
-      debounceFilter(ms, options),
-      fn
-    );
-  }
-  function useToNumber(value, options = {}) {
-    const {
-      method = "parseFloat",
-      radix,
-      nanToZero
-    } = options;
-    return computed(() => {
-      let resolved = toValue(value);
-      if (typeof method === "function")
-        resolved = method(resolved);
-      else if (typeof resolved === "string")
-        resolved = Number[method](resolved, radix);
-      if (nanToZero && Number.isNaN(resolved))
-        resolved = 0;
-      return resolved;
-    });
-  }
-  function watchImmediate(source, cb, options) {
-    return watch(
-      source,
-      cb,
-      {
-        ...options,
-        immediate: true
-      }
-    );
-  }
-
-  const defaultWindow = isClient ? window : void 0;
-  function unrefElement(elRef) {
-    var _a;
-    const plain = toValue(elRef);
-    return (_a = plain == null ? void 0 : plain.$el) != null ? _a : plain;
-  }
-  function useEventListener(...args) {
-    const cleanups = [];
-    const cleanup = () => {
-      cleanups.forEach((fn) => fn());
-      cleanups.length = 0;
-    };
-    const register = (el, event, listener, options) => {
-      el.addEventListener(event, listener, options);
-      return () => el.removeEventListener(event, listener, options);
-    };
-    const firstParamTargets = computed(() => {
-      const test = toArray(toValue(args[0])).filter((e) => e != null);
-      return test.every((e) => typeof e !== "string") ? test : void 0;
-    });
-    const stopWatch = watchImmediate(
-      () => {
-        var _a, _b;
-        return [
-          (_b = (_a = firstParamTargets.value) == null ? void 0 : _a.map((e) => unrefElement(e))) != null ? _b : [defaultWindow].filter((e) => e != null),
-          toArray(toValue(firstParamTargets.value ? args[1] : args[0])),
-          toArray(unref(firstParamTargets.value ? args[2] : args[1])),
-          // @ts-expect-error - TypeScript gets the correct types, but somehow still complains
-          toValue(firstParamTargets.value ? args[3] : args[2])
-        ];
-      },
-      ([raw_targets, raw_events, raw_listeners, raw_options]) => {
-        cleanup();
-        if (!(raw_targets == null ? void 0 : raw_targets.length) || !(raw_events == null ? void 0 : raw_events.length) || !(raw_listeners == null ? void 0 : raw_listeners.length))
-          return;
-        const optionsClone = isObject(raw_options) ? { ...raw_options } : raw_options;
-        cleanups.push(
-          ...raw_targets.flatMap(
-            (el) => raw_events.flatMap(
-              (event) => raw_listeners.map((listener) => register(el, event, listener, optionsClone))
-            )
-          )
-        );
-      },
-      { flush: "post" }
-    );
-    const stop = () => {
-      stopWatch();
-      cleanup();
-    };
-    tryOnScopeDispose(cleanup);
-    return stop;
-  }
-  function useFocus(target, options = {}) {
-    const { initialValue = false, focusVisible = false, preventScroll = false } = options;
-    const innerFocused = shallowRef(false);
-    const targetElement = computed(() => unrefElement(target));
-    const listenerOptions = { passive: true };
-    useEventListener(targetElement, "focus", (event) => {
-      var _a, _b;
-      if (!focusVisible || ((_b = (_a = event.target).matches) == null ? void 0 : _b.call(_a, ":focus-visible")))
-        innerFocused.value = true;
-    }, listenerOptions);
-    useEventListener(targetElement, "blur", () => innerFocused.value = false, listenerOptions);
-    const focused = computed({
-      get: () => innerFocused.value,
-      set(value) {
-        var _a, _b;
-        if (!value && innerFocused.value)
-          (_a = targetElement.value) == null ? void 0 : _a.blur();
-        else if (value && !innerFocused.value)
-          (_b = targetElement.value) == null ? void 0 : _b.focus({ preventScroll });
-      }
-    });
-    watch(
-      targetElement,
-      () => {
-        focused.value = initialValue;
-      },
-      { immediate: true, flush: "post" }
-    );
-    return { focused };
-  }
-
-  const useStateClass = (value) => computed(() => {
-    const resolvedValue = toValue(value);
-    return resolvedValue === true ? "is-valid" : resolvedValue === false ? "is-invalid" : null;
-  });
-
-  const normalizeInput = (v, modelModifiers) => {
-    if (v === null) return;
-    let update = v;
-    if (modelModifiers.number && typeof update === "string" && update !== "") {
-      const parsed = Number.parseFloat(update);
-      update = Number.isNaN(parsed) ? update : parsed;
-    }
-    return update;
-  };
-  const useFormInput = (props, input, modelValue, modelModifiers) => {
-    var _a;
-    const forceUpdateKey = ref(0);
-    const computedId = useId(() => props.id, "input");
-    const debounceNumber = useToNumber(() => props.debounce ?? 0);
-    const debounceMaxWaitNumber = useToNumber(() => props.debounceMaxWait ?? NaN);
-    const formGroupData = (_a = inject(formGroupPluginKey, null)) == null ? void 0 : _a(computedId);
-    const computedState = computed(
-      () => props.state !== void 0 ? props.state : (formGroupData == null ? void 0 : formGroupData.state.value) ?? null
-    );
-    const computedAriaInvalid = useAriaInvalid(() => props.ariaInvalid, computedState);
-    const stateClass = useStateClass(computedState);
-    const internalUpdateModelValue = useDebounceFn(
-      (value) => {
-        modelValue.value = value;
-      },
-      () => modelModifiers.lazy === true ? 0 : debounceNumber.value,
-      { maxWait: () => modelModifiers.lazy === true ? NaN : debounceMaxWaitNumber.value }
-    );
-    const updateModelValue = (value, force = false) => {
-      if (modelModifiers.lazy === true && force === false) return;
-      internalUpdateModelValue(value);
-    };
-    const { focused } = useFocus(input, {
-      initialValue: props.autofocus
-    });
-    const _formatValue = (value, evt, force = false) => {
-      if (props.formatter !== void 0 && (!props.lazyFormatter || force)) {
-        return props.formatter(value, evt);
-      }
-      return value;
-    };
-    onMounted(() => {
-      var _a2;
-      if (input.value) {
-        input.value.value = ((_a2 = modelValue.value) == null ? void 0 : _a2.toString()) ?? "";
-      }
-    });
-    onActivated(() => {
-      nextTick(() => {
-        if (props.autofocus) {
-          focused.value = true;
-        }
-      });
-    });
-    const onInput = (evt) => {
-      const { value } = evt.target;
-      const formattedValue = _formatValue(value, evt);
-      if (evt.defaultPrevented) {
-        evt.preventDefault();
-        return;
-      }
-      const nextModel = formattedValue;
-      updateModelValue(nextModel);
-    };
-    const onChange = (evt) => {
-      const { value } = evt.target;
-      const formattedValue = _formatValue(value, evt);
-      if (evt.defaultPrevented) {
-        evt.preventDefault();
-        return;
-      }
-      const nextModel = formattedValue;
-      if (modelValue.value !== nextModel) {
-        updateModelValue(formattedValue, true);
-      }
-    };
-    const onBlur = (evt) => {
-      if (!modelModifiers.lazy && !props.lazyFormatter && !modelModifiers.trim) return;
-      const { value } = evt.target;
-      const formattedValue = _formatValue(value, evt, true);
-      const nextModel = modelModifiers.trim ? formattedValue.trim() : formattedValue;
-      const needsForceUpdate = nextModel.length !== formattedValue.length;
-      if (modelValue.value !== nextModel) {
-        updateModelValue(formattedValue, true);
-      }
-      if (modelModifiers.trim && needsForceUpdate) {
-        forceUpdateKey.value = forceUpdateKey.value + 1;
-      }
-    };
-    const focus = () => {
-      if (!props.disabled) {
-        focused.value = true;
-      }
-    };
-    const blur = () => {
-      if (!props.disabled) {
-        focused.value = false;
-      }
-    };
-    return {
-      input,
-      computedId,
-      computedAriaInvalid,
-      onInput,
-      onChange,
-      onBlur,
-      focus,
-      blur,
-      forceUpdateKey,
-      stateClass
-    };
-  };
-
-  const _hoisted_1$1 = ["id", "value", "name", "form", "type", "disabled", "placeholder", "required", "autocomplete", "readonly", "min", "max", "step", "list", "aria-required", "aria-invalid"];
-  const _sfc_main$1 = /* @__PURE__ */ defineComponent({
-    __name: "BFormInput",
-    props: /* @__PURE__ */ mergeModels({
-      max: { default: void 0 },
-      min: { default: void 0 },
-      step: { default: void 0 },
-      type: { default: "text" },
-      ariaInvalid: { type: [Boolean, String], default: void 0 },
-      autocomplete: { default: void 0 },
-      autofocus: { type: Boolean, default: false },
-      disabled: { type: Boolean, default: false },
-      form: { default: void 0 },
-      formatter: { type: Function, default: void 0 },
-      id: { default: void 0 },
-      lazyFormatter: { type: Boolean, default: false },
-      list: { default: void 0 },
-      name: { default: void 0 },
-      placeholder: { default: void 0 },
-      plaintext: { type: Boolean, default: false },
-      readonly: { type: Boolean, default: false },
-      required: { type: Boolean, default: false },
-      size: { default: void 0 },
-      state: { type: [Boolean, null], default: void 0 },
-      debounce: { default: 0 },
-      debounceMaxWait: { default: NaN }
-    }, {
-      "modelValue": {
-        default: ""
-      },
-      "modelModifiers": {}
-    }),
-    emits: ["update:modelValue"],
-    setup(__props, { expose: __expose }) {
-      const _props = __props;
-      const props = useDefaults(_props, "BFormInput");
-      const [modelValue, modelModifiers] = useModel(__props, "modelValue", {
-        set: (v) => normalizeInput(v, modelModifiers)
-      });
-      const input = useTemplateRef("_input");
-      const {
-        computedId,
-        computedAriaInvalid,
-        onInput,
-        onChange,
-        onBlur,
-        stateClass,
-        focus,
-        blur,
-        forceUpdateKey
-      } = useFormInput(props, input, modelValue, modelModifiers);
-      const computedClasses = computed(() => {
-        const isRange = props.type === "range";
-        const isColor = props.type === "color";
-        return [
-          stateClass.value,
-          {
-            "form-range": isRange,
-            "form-control": isColor || !props.plaintext && !isRange,
-            "form-control-color": isColor,
-            "form-control-plaintext": props.plaintext && !isRange && !isColor,
-            [`form-control-${props.size}`]: !!props.size
-          }
-        ];
-      });
-      __expose({
-        blur,
-        element: input,
-        focus
-      });
-      return (_ctx, _cache) => {
-        return openBlock(), createElementBlock("input", {
-          id: unref(computedId),
-          ref: "_input",
-          key: unref(forceUpdateKey),
-          value: unref(modelValue),
-          class: normalizeClass(computedClasses.value),
-          name: unref(props).name || void 0,
-          form: unref(props).form || void 0,
-          type: unref(props).type,
-          disabled: unref(props).disabled,
-          placeholder: unref(props).placeholder,
-          required: unref(props).required || void 0,
-          autocomplete: unref(props).autocomplete || void 0,
-          readonly: unref(props).readonly || unref(props).plaintext,
-          min: unref(props).min,
-          max: unref(props).max,
-          step: unref(props).step,
-          list: unref(props).type !== "password" ? unref(props).list : void 0,
-          "aria-required": unref(props).required || void 0,
-          "aria-invalid": unref(computedAriaInvalid),
-          onInput: _cache[0] || (_cache[0] = //@ts-ignore
-          (...args) => unref(onInput) && unref(onInput)(...args)),
-          onChange: _cache[1] || (_cache[1] = //@ts-ignore
-          (...args) => unref(onChange) && unref(onChange)(...args)),
-          onBlur: _cache[2] || (_cache[2] = //@ts-ignore
-          (...args) => unref(onBlur) && unref(onBlur)(...args))
-        }, null, 42, _hoisted_1$1);
-      };
-    }
-  });
-
   /* unplugin-vue-components disabled */const _style_0 = "\n.client-search {\n        width: 100%;\n        font-family: system-ui, sans-serif;\n}\ninput {\n        padding: 0.75rem;\n        width: 100%;\n        font-size: 1rem;\n        border: 1px solid #d1d5db;\n        border-radius: 4px;\n        box-sizing: border-box;\n}\n.results {\n        list-style: none;\n        padding: 0;\n        margin: 0;\n        border: 1px solid #d1d5db;\n        border-top: none;\n}\n.result-item {\n        border-radius: 4px;\n        padding: 1rem;\n        margin-bottom: 0.75rem;\n        background: #fff;\n        cursor: pointer;\n        transition: background 0.2s;\n}\n.result-item:hover {\n        background: #f9f9f9;\n}\n.result-header {\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        margin-bottom: 0.25rem;\n}\n.name {\n        font-weight: 600;\n        font-size: 1.1rem;\n}\n.number {\n        color: #666;\n        font-size: 0.9rem;\n        margin-left: 0.5rem;\n}\n.badges {\n        display: flex;\n        gap: 0.25rem;\n}\n.address {\n        margin-bottom: 0.25rem;\n        color: #555;\n}\n.contact {\n        font-size: 0.9rem;\n        color: #666;\n        margin-bottom: 0.25rem;\n}\n.labels {\n        font-size: 0.9rem;\n        color: #444;\n        margin-bottom: 0.5rem;\n}\n.tags {\n        display: flex;\n        flex-wrap: wrap;\n        gap: 0.5rem;\n}\n.tag {\n        font-size: 0.8rem;\n        padding: 0.3rem 0.5rem;\n        border-radius: 4px;\n        background-color: #f0f0f0;\n}\n.tag.utr {\n        background-color: #fef3c7;\n        border: 1px solid #facc15;\n}\n.tag.vat {\n        background-color: #dbeafe;\n        border: 1px solid #3b82f6;\n}\n.tag.reg {\n        background-color: #fee2e2;\n        border: 1px solid #ef4444;\n}\n";
 
   const _export_sfc = (sfc, props) => {
@@ -19190,126 +18283,96 @@ ${codeFrame}` : message);
   };
 
   const _hoisted_1 = { class: "client-search" };
-  const _hoisted_2 = {
+  const _hoisted_2 = ["value"];
+  const _hoisted_3 = {
     key: 0,
     class: "results"
   };
-  const _hoisted_3 = ["onClick"];
-  const _hoisted_4 = { class: "result-header" };
-  const _hoisted_5 = { class: "name" };
-  const _hoisted_6 = { class: "number" };
-  const _hoisted_7 = { class: "address" };
-  const _hoisted_8 = { class: "contact" };
-  const _hoisted_9 = { class: "labels" };
-  const _hoisted_10 = { class: "tags" };
+  const _hoisted_4 = ["onClick"];
+  const _hoisted_5 = { class: "result-header" };
+  const _hoisted_6 = { class: "name" };
+  const _hoisted_7 = { class: "number" };
+  const _hoisted_8 = { class: "address" };
+  const _hoisted_9 = { class: "contact" };
+  const _hoisted_10 = { class: "labels" };
+  const _hoisted_11 = { class: "tags" };
+  const _hoisted_12 = {
+    key: 0,
+    class: "tag utr"
+  };
+  const _hoisted_13 = {
+    key: 1,
+    class: "tag vat"
+  };
+  const _hoisted_14 = {
+    key: 2,
+    class: "tag reg"
+  };
 
-      
+
   const _sfc_main = {
     __name: 'ClientSearch.ce',
     props: {
-          modelValue: {
-              type: String,
-              default: '',
-          },
-          results: {
-              type: Array,
-              default: () => [],
-          },
+          modelValue: String,
+          results: Array,
       },
     emits: ['update:modelValue', 'select'],
-    setup(__props, { emit: __emit }) {
+    setup(__props) {
 
-      const props = __props;
-
-      const emit = __emit;
-
-      const inputValue = computed({
-          get() {
-              return props.modelValue;
-          },
-          set(value) {
-              emit('update:modelValue', value);
-          },
-      });
+      
+      
 
   return (_ctx, _cache) => {
-    const _component_b_form_input = _sfc_main$1;
-    const _component_b_badge = _sfc_main$2;
-
     return (openBlock(), createElementBlock("div", _hoisted_1, [
-      createVNode(_component_b_form_input, {
+      createBaseVNode("input", {
         type: "text",
-        modelValue: inputValue.value,
-        "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => ((inputValue).value = $event)),
+        value: __props.modelValue,
+        onInput: _cache[0] || (_cache[0] = $event => (_ctx.$emit('update:modelValue', $event.target.value))),
         placeholder: "Search clients..."
-      }, null, 8, ["modelValue"]),
+      }, null, 40, _hoisted_2),
       (__props.results?.length)
-        ? (openBlock(), createElementBlock("ul", _hoisted_2, [
+        ? (openBlock(), createElementBlock("ul", _hoisted_3, [
             (openBlock(true), createElementBlock(Fragment, null, renderList(__props.results, (result) => {
               return (openBlock(), createElementBlock("li", {
                 key: result.number,
                 class: "result-item",
                 onClick: $event => (_ctx.$emit('select', result))
               }, [
-                createBaseVNode("div", _hoisted_4, [
+                createBaseVNode("div", _hoisted_5, [
                   createBaseVNode("div", null, [
-                    createBaseVNode("strong", _hoisted_5, toDisplayString(result.name), 1),
-                    createBaseVNode("span", _hoisted_6, "(" + toDisplayString(result.number) + ")", 1)
+                    createBaseVNode("strong", _hoisted_6, toDisplayString(result.name), 1),
+                    createBaseVNode("span", _hoisted_7, "(" + toDisplayString(result.number) + ")", 1)
                   ]),
                   _cache[1] || (_cache[1] = createBaseVNode("div", { class: "badges" }, [
                     createBaseVNode("span", { class: "badge" }, "🟢"),
                     createBaseVNode("span", { class: "badge" }, "🔴")
                   ], -1))
                 ]),
-                createBaseVNode("div", _hoisted_7, toDisplayString(result.address), 1),
-                createBaseVNode("div", _hoisted_8, [
+                createBaseVNode("div", _hoisted_8, toDisplayString(result.address), 1),
+                createBaseVNode("div", _hoisted_9, [
                   createBaseVNode("span", null, toDisplayString(result.email), 1),
                   _cache[2] || (_cache[2] = createTextVNode(" | ")),
                   createBaseVNode("span", null, toDisplayString(result.phone), 1),
                   _cache[3] || (_cache[3] = createTextVNode(" | ")),
                   createBaseVNode("span", null, toDisplayString(result.country), 1)
                 ]),
-                createBaseVNode("div", _hoisted_9, [
+                createBaseVNode("div", _hoisted_10, [
                   createBaseVNode("strong", null, toDisplayString(result.type), 1),
                   _cache[4] || (_cache[4] = createTextVNode(" | ")),
                   createBaseVNode("strong", null, toDisplayString(result.category), 1)
                 ]),
-                createBaseVNode("div", _hoisted_10, [
+                createBaseVNode("div", _hoisted_11, [
                   (result.utr)
-                    ? (openBlock(), createBlock(_component_b_badge, {
-                        key: 0,
-                        variant: "primary"
-                      }, {
-                        default: withCtx(() => [
-                          createTextVNode("UTR: " + toDisplayString(result.utr), 1)
-                        ]),
-                        _: 2
-                      }, 1024))
+                    ? (openBlock(), createElementBlock("span", _hoisted_12, "UTR: " + toDisplayString(result.utr), 1))
                     : createCommentVNode("", true),
                   (result.vat)
-                    ? (openBlock(), createBlock(_component_b_badge, {
-                        key: 1,
-                        variant: "secondary"
-                      }, {
-                        default: withCtx(() => [
-                          createTextVNode("VAT: " + toDisplayString(result.vat), 1)
-                        ]),
-                        _: 2
-                      }, 1024))
+                    ? (openBlock(), createElementBlock("span", _hoisted_13, "VAT: " + toDisplayString(result.vat), 1))
                     : createCommentVNode("", true),
                   (result.reg)
-                    ? (openBlock(), createBlock(_component_b_badge, {
-                        key: 2,
-                        variant: "danger"
-                      }, {
-                        default: withCtx(() => [
-                          createTextVNode("REG: " + toDisplayString(result.reg), 1)
-                        ]),
-                        _: 2
-                      }, 1024))
+                    ? (openBlock(), createElementBlock("span", _hoisted_14, "REG: " + toDisplayString(result.reg), 1))
                     : createCommentVNode("", true)
                 ])
-              ], 8, _hoisted_3))
+              ], 8, _hoisted_4))
             }), 128))
           ]))
         : createCommentVNode("", true)
