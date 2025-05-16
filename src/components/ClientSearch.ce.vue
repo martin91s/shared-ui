@@ -1,8 +1,8 @@
 <template>
     <div class="client-search">
         <input
-            :value="modelValue"
-            @input="emit('update:modelValue', $event.target.value)"
+            type="text"
+            v-model="model"
             placeholder="Search clients..."
         />
         <ul v-if="results?.length" class="results">
@@ -46,11 +46,11 @@
 </template>
 
 <script setup>
+    const model = defineModel();
     defineProps({
-        modelValue: String,
         results: Array,
     });
-    const emit = defineEmits(['update:modelValue', 'select']);
+    defineEmits(['select']);
 </script>
 
 <style>

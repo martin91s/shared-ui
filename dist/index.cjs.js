@@ -18283,28 +18283,27 @@ ${codeFrame}` : message);
   };
 
   const _hoisted_1 = { class: "client-search" };
-  const _hoisted_2 = ["value"];
-  const _hoisted_3 = {
+  const _hoisted_2 = {
     key: 0,
     class: "results"
   };
-  const _hoisted_4 = ["onClick"];
-  const _hoisted_5 = { class: "result-header" };
-  const _hoisted_6 = { class: "name" };
-  const _hoisted_7 = { class: "number" };
-  const _hoisted_8 = { class: "address" };
-  const _hoisted_9 = { class: "contact" };
-  const _hoisted_10 = { class: "labels" };
-  const _hoisted_11 = { class: "tags" };
-  const _hoisted_12 = {
+  const _hoisted_3 = ["onClick"];
+  const _hoisted_4 = { class: "result-header" };
+  const _hoisted_5 = { class: "name" };
+  const _hoisted_6 = { class: "number" };
+  const _hoisted_7 = { class: "address" };
+  const _hoisted_8 = { class: "contact" };
+  const _hoisted_9 = { class: "labels" };
+  const _hoisted_10 = { class: "tags" };
+  const _hoisted_11 = {
     key: 0,
     class: "tag utr"
   };
-  const _hoisted_13 = {
+  const _hoisted_12 = {
     key: 1,
     class: "tag vat"
   };
-  const _hoisted_14 = {
+  const _hoisted_13 = {
     key: 2,
     class: "tag reg"
   };
@@ -18312,66 +18311,71 @@ ${codeFrame}` : message);
 
   const _sfc_main = {
     __name: 'ClientSearch.ce',
-    props: {
-          modelValue: String,
+    props: /*@__PURE__*/mergeModels({
           results: Array,
-      },
-    emits: ['update:modelValue', 'select'],
-    setup(__props, { emit: __emit }) {
+      }, {
+      "modelValue": {},
+      "modelModifiers": {},
+    }),
+    emits: /*@__PURE__*/mergeModels(['select'], ["update:modelValue"]),
+    setup(__props) {
 
+      const model = useModel(__props, "modelValue");
       
-      const emit = __emit;
+      
 
   return (_ctx, _cache) => {
     return (openBlock(), createElementBlock("div", _hoisted_1, [
-      createBaseVNode("input", {
-        value: __props.modelValue,
-        onInput: _cache[0] || (_cache[0] = $event => (emit('update:modelValue', $event.target.value))),
+      withDirectives(createBaseVNode("input", {
+        type: "text",
+        "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => ((model).value = $event)),
         placeholder: "Search clients..."
-      }, null, 40, _hoisted_2),
+      }, null, 512), [
+        [vModelText, model.value]
+      ]),
       (__props.results?.length)
-        ? (openBlock(), createElementBlock("ul", _hoisted_3, [
+        ? (openBlock(), createElementBlock("ul", _hoisted_2, [
             (openBlock(true), createElementBlock(Fragment, null, renderList(__props.results, (result) => {
               return (openBlock(), createElementBlock("li", {
                 key: result.number,
                 class: "result-item",
                 onClick: $event => (_ctx.$emit('select', result))
               }, [
-                createBaseVNode("div", _hoisted_5, [
+                createBaseVNode("div", _hoisted_4, [
                   createBaseVNode("div", null, [
-                    createBaseVNode("strong", _hoisted_6, toDisplayString(result.name), 1),
-                    createBaseVNode("span", _hoisted_7, "(" + toDisplayString(result.number) + ")", 1)
+                    createBaseVNode("strong", _hoisted_5, toDisplayString(result.name), 1),
+                    createBaseVNode("span", _hoisted_6, "(" + toDisplayString(result.number) + ")", 1)
                   ]),
                   _cache[1] || (_cache[1] = createBaseVNode("div", { class: "badges" }, [
                     createBaseVNode("span", { class: "badge" }, "🟢"),
                     createBaseVNode("span", { class: "badge" }, "🔴")
                   ], -1))
                 ]),
-                createBaseVNode("div", _hoisted_8, toDisplayString(result.address), 1),
-                createBaseVNode("div", _hoisted_9, [
+                createBaseVNode("div", _hoisted_7, toDisplayString(result.address), 1),
+                createBaseVNode("div", _hoisted_8, [
                   createBaseVNode("span", null, toDisplayString(result.email), 1),
                   _cache[2] || (_cache[2] = createTextVNode(" | ")),
                   createBaseVNode("span", null, toDisplayString(result.phone), 1),
                   _cache[3] || (_cache[3] = createTextVNode(" | ")),
                   createBaseVNode("span", null, toDisplayString(result.country), 1)
                 ]),
-                createBaseVNode("div", _hoisted_10, [
+                createBaseVNode("div", _hoisted_9, [
                   createBaseVNode("strong", null, toDisplayString(result.type), 1),
                   _cache[4] || (_cache[4] = createTextVNode(" | ")),
                   createBaseVNode("strong", null, toDisplayString(result.category), 1)
                 ]),
-                createBaseVNode("div", _hoisted_11, [
+                createBaseVNode("div", _hoisted_10, [
                   (result.utr)
-                    ? (openBlock(), createElementBlock("span", _hoisted_12, "UTR: " + toDisplayString(result.utr), 1))
+                    ? (openBlock(), createElementBlock("span", _hoisted_11, "UTR: " + toDisplayString(result.utr), 1))
                     : createCommentVNode("", true),
                   (result.vat)
-                    ? (openBlock(), createElementBlock("span", _hoisted_13, "VAT: " + toDisplayString(result.vat), 1))
+                    ? (openBlock(), createElementBlock("span", _hoisted_12, "VAT: " + toDisplayString(result.vat), 1))
                     : createCommentVNode("", true),
                   (result.reg)
-                    ? (openBlock(), createElementBlock("span", _hoisted_14, "REG: " + toDisplayString(result.reg), 1))
+                    ? (openBlock(), createElementBlock("span", _hoisted_13, "REG: " + toDisplayString(result.reg), 1))
                     : createCommentVNode("", true)
                 ])
-              ], 8, _hoisted_4))
+              ], 8, _hoisted_3))
             }), 128))
           ]))
         : createCommentVNode("", true)
