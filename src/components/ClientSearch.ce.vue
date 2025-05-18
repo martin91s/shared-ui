@@ -1,16 +1,23 @@
 <template>
     <div class="client-search">
-        <input
-            type="text"
-            v-model="model"
-            placeholder="Search clients..."
-        />
-        <ul v-if="results?.length" class="results">
+        <div v-if="selected.name" class="selected">
+            {{ selected.name }}
+        </div>
+        <div v-else class="input-wrapper">
+            <span class="icon" v-html="searchIcon" />
+            <input
+                type="text"
+                v-model="model"
+                placeholder="Search..."
+            />
+            <span class="icon bright-icon" v-html="brightIcon" />
+        </div>
+        <ul v-if="resultsOpen" class="results">
             <li
                 v-for="result in results"
                 :key="result.number"
                 class="result-item"
-                @click="$emit('select', result)"
+                @click="setSelected(result)"
             >
                 <div class="result-header">
                     <div>
@@ -46,26 +53,64 @@
 </template>
 
 <script setup>
-    const model = defineModel();
+    import { ref, watch } from 'vue';
+    import searchIcon from '../assets/icons/search.svg?raw';
+    import brightIcon from '../assets/icons/bright-b.svg?raw';
+
+    const model = defineModel({ default: '' });
+    const selected = defineModel('selected', { default: () => ({}) });
+
     defineProps({
-        results: Array,
+        results: {
+            type: Array,
+            default: () => ([]),
+        },
     });
-    defineEmits(['select']);
+    const emit = defineEmits(['select']);
+
+    const resultsOpen = ref(false);
+
+    watch(model, (val) => {
+        if (val && val.length) { resultsOpen.value = true; }
+    }, { immediate: true });
+
+    const setSelected = (result) => {
+        selected.value = result;
+        resultsOpen.value = false;
+        emit('select', result);
+    };
 </script>
 
 <style>
     .client-search {
         width: 100%;
-        font-family: system-ui, sans-serif;
     }
 
-    input {
-        padding: 0.75rem;
-        width: 100%;
-        font-size: 1rem;
-        border: 1px solid #d1d5db;
-        border-radius: 4px;
-        box-sizing: border-box;
+    .input-wrapper {
+        position: relative;
+
+        .icon {
+            position: absolute;
+            top: 0;
+            left: 8px;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .bright-icon {
+            left: unset;
+            right: 16px;
+        }
+
+        input {
+            padding: 10px 36px;
+            width: 100%;
+            font-size: 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
     }
 
     .results {
