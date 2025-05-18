@@ -1,84 +1,57 @@
-// src/stories/ClientSearchCe.stories.js
 import ClientSearchCe from '../components/ClientSearch.ce.vue';
 
+const results = [
+    {
+        name: "Acme Ltd",
+        number: "1234567890",
+        address: "Unit 35, Commons, Duleek Business Park, Co. Meath, A92 N15E, Ireland",
+        email: "info@acmeltd.com",
+        phone: "07890 098765",
+        country: "Ireland",
+        type: "Private Limited Company",
+        category: "Software",
+        utr: "1234567890",
+        vat: "01234567890",
+        reg: "12345678",
+    },
+    {
+        name: "Beta Corp",
+        number: "9876543210",
+        address: "12 King Street, London, UK",
+        email: "contact@betacorp.com",
+        phone: "01234 567890",
+        country: "UK",
+        type: "LLP",
+        category: "Consulting",
+        utr: "9876543210",
+        vat: "09876543210",
+        reg: "87654321",
+    },
+];
 export default {
     title: 'ClientSearch',
     component: ClientSearchCe,
+    argTypes: {
+        modelValue: { control: 'text' },
+        results: { control: 'object' },
+        'update:modelValue': { action: 'update:modelValue' },
+        select: { action: 'select' },
+    },
+    args: {
+        results,
+    },
 };
 
-export const Default = () => ({
-    components: { ClientSearch: ClientSearchCe },
-    template: `
-        <ClientSearch :results="results" @search-input="onInput" @selected="onSelect" />
-    `,
-    data() {
-        return {
-            results: [],
-        };
-    },
-    methods: {
-        onInput(val) {
-            console.log('Input:', val);
-        },
-        onSelect(item) {
-            console.log('Selected:', item);
-        },
-    },
-});
+export const Default = {};
 
-export const DropdownVisible = () => ({
-    components: { ClientSearch: ClientSearchCe },
-    template: `
-    <ClientSearch
-      :results="results"
-      @search-input="onInput"
-      @selected="onSelect"
-    />
-  `,
-    data() {
-        return {
-            query: 'Acme',
-            results: [
-                {
-                    name: "Acme Ltd",
-                    number: "1234567890",
-                    address: "Unit 35, Commons, Duleek Business Park, Co. Meath, A92 N15E, Ireland",
-                    email: "info@acmeltd.com",
-                    phone: "07890 098765",
-                    country: "Ireland",
-                    type: "Private Limited Company",
-                    category: "Software",
-                    utr: "1234567890",
-                    vat: "01234567890",
-                    reg: "12345678"
-                },
-                {
-                    name: "Acme Ltd",
-                    number: "1234567890",
-                    address: "Unit 35, Commons, Duleek Business Park, Co. Meath, A92 N15E, Ireland",
-                    email: "info@acmeltd.com",
-                    phone: "07890 098765",
-                    country: "Ireland",
-                    type: "Private Limited Company",
-                    category: "Software",
-                    utr: "1234567890",
-                    vat: "01234567890",
-                    reg: "12345678"
-                },
-            ],
-        };
+export const WithResults = {
+    args: {
+        modelValue: "Acme",
     },
-    mounted() {
-        // simulate user input to open dropdown
-        this.$el.querySelector('input').value = this.query;
-        this.$el.querySelector('input').dispatchEvent(new Event('input', { bubbles: true }));
+};
+
+export const Selected = {
+    args: {
+        selected: results[0],
     },
-    methods: {
-        onInput(val) {
-            console.log('Input:', val);
-        },
-        onSelect(item) {
-            console.log('Selected:', item);
-        },
-    },
-});
+};

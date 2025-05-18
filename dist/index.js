@@ -18267,7 +18267,11 @@ ${codeFrame}` : message);
 }
 registerRuntimeCompiler(compileToFunction);
 
-const _style_0 = "\n.client-search {\n        width: 100%;\n        font-family: system-ui, sans-serif;\n}\ninput {\n        padding: 0.75rem;\n        width: 100%;\n        font-size: 1rem;\n        border: 1px solid #d1d5db;\n        border-radius: 4px;\n        box-sizing: border-box;\n}\n.results {\n        list-style: none;\n        padding: 0;\n        margin: 0;\n        border: 1px solid #d1d5db;\n        border-top: none;\n}\n.result-item {\n        border-radius: 4px;\n        padding: 1rem;\n        margin-bottom: 0.75rem;\n        background: #fff;\n        cursor: pointer;\n        transition: background 0.2s;\n}\n.result-item:hover {\n        background: #f9f9f9;\n}\n.result-header {\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        margin-bottom: 0.25rem;\n}\n.name {\n        font-weight: 600;\n        font-size: 1.1rem;\n}\n.number {\n        color: #666;\n        font-size: 0.9rem;\n        margin-left: 0.5rem;\n}\n.badges {\n        display: flex;\n        gap: 0.25rem;\n}\n.address {\n        margin-bottom: 0.25rem;\n        color: #555;\n}\n.contact {\n        font-size: 0.9rem;\n        color: #666;\n        margin-bottom: 0.25rem;\n}\n.labels {\n        font-size: 0.9rem;\n        color: #444;\n        margin-bottom: 0.5rem;\n}\n.tags {\n        display: flex;\n        flex-wrap: wrap;\n        gap: 0.5rem;\n}\n.tag {\n        font-size: 0.8rem;\n        padding: 0.3rem 0.5rem;\n        border-radius: 4px;\n        background-color: #f0f0f0;\n}\n.tag.utr {\n        background-color: #fef3c7;\n        border: 1px solid #facc15;\n}\n.tag.vat {\n        background-color: #dbeafe;\n        border: 1px solid #3b82f6;\n}\n.tag.reg {\n        background-color: #fee2e2;\n        border: 1px solid #ef4444;\n}\n";
+const searchIcon = "<svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <mask id=\"mask0_7257_23857\" style=\"mask-type:alpha\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"20\" height=\"20\">\n        <rect width=\"20\" height=\"20\" fill=\"#D9D9D9\"/>\n    </mask>\n    <g mask=\"url(#mask0_7257_23857)\">\n        <path d=\"M15.846 16.7081L11.0511 11.9132C10.6345 12.2572 10.1553 12.5265 9.61363 12.7209C9.07197 12.9153 8.51161 13.0126 7.93255 13.0126C6.50825 13.0126 5.30281 12.5194 4.31626 11.5331C3.3297 10.5468 2.83643 9.34168 2.83643 7.91775C2.83643 6.49381 3.32958 5.28824 4.31588 4.30106C5.30219 3.3139 6.50731 2.82031 7.93126 2.82031C9.35519 2.82031 10.5607 3.31359 11.5479 4.30015C12.5351 5.2867 13.0287 6.49213 13.0287 7.91644C13.0287 8.51152 12.9288 9.0799 12.729 9.62156C12.5292 10.1632 12.2627 10.6344 11.9293 11.035L16.7451 15.8507C16.8604 15.9639 16.9181 16.1027 16.9181 16.2673C16.9181 16.4319 16.8529 16.5794 16.7225 16.7098C16.6029 16.8294 16.4571 16.8892 16.2851 16.8892C16.1131 16.8892 15.9668 16.8288 15.846 16.7081ZM7.93255 11.7626C9.00627 11.7626 9.91573 11.39 10.6609 10.6448C11.4061 9.89962 11.7787 8.99016 11.7787 7.91644C11.7787 6.84272 11.4061 5.93326 10.6609 5.18806C9.91573 4.44287 9.00627 4.07027 7.93255 4.07027C6.85883 4.07027 5.94937 4.44287 5.20418 5.18806C4.459 5.93326 4.08641 6.84272 4.08641 7.91644C4.08641 8.99016 4.459 9.89962 5.20418 10.6448C5.94937 11.39 6.85883 11.7626 7.93255 11.7626Z\" fill=\"#374151\"/>\n    </g>\n</svg>\n";
+
+const brightIcon = "<svg width=\"8\" height=\"12\" viewBox=\"0 0 8 12\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path d=\"M0 9.96581C0 10.1251 0.0907694 10.2546 0.217867 10.3243C0.344963 10.394 0.508387 10.404 0.653648 10.3243L2.75778 9.17027V0.0952148L0 1.60772V9.96581Z\" fill=\"#009FC7\"/>\n    <path d=\"M0.217867 10.3243C0.344963 10.394 0.508387 10.404 0.653648 10.3243L5.5155 7.65776L7.61962 8.81178C7.76485 8.89142 7.83748 9.03083 7.83748 9.17028C7.83748 9.30966 7.76485 9.44907 7.61962 9.52874L3.41134 11.8368C3.26609 11.9164 3.10271 11.9065 2.97562 11.8368L0.217867 10.3243Z\" fill=\"#E39400\"/>\n    <path d=\"M4.13663 6.90151L7.61962 8.81178C7.76485 8.89142 7.83748 9.03083 7.83748 9.17028L7.8375 6.14527C7.8375 6.00581 7.76491 5.86641 7.61964 5.78677L4.13663 3.87651V6.90151Z\" fill=\"#E6D600\"/>\n</svg>\n";
+
+const _style_0 = "\n.client-search {\n        width: 100%;\n}\n.input-wrapper {\n        position: relative;\n.icon {\n            position: absolute;\n            top: 0;\n            left: 8px;\n            bottom: 0;\n            display: flex;\n            align-items: center;\n}\n.bright-icon {\n            left: unset;\n            right: 16px;\n}\ninput {\n            padding: 10px 36px;\n            width: 100%;\n            font-size: 1rem;\n            border: 1px solid #d1d5db;\n            border-radius: 4px;\n            box-sizing: border-box;\n}\n}\n.results {\n        list-style: none;\n        padding: 0;\n        margin: 0;\n        border: 1px solid #d1d5db;\n        border-top: none;\n}\n.result-item {\n        border-radius: 4px;\n        padding: 1rem;\n        margin-bottom: 0.75rem;\n        background: #fff;\n        cursor: pointer;\n        transition: background 0.2s;\n}\n.result-item:hover {\n        background: #f9f9f9;\n}\n.result-header {\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        margin-bottom: 0.25rem;\n}\n.name {\n        font-weight: 600;\n        font-size: 1.1rem;\n}\n.number {\n        color: #666;\n        font-size: 0.9rem;\n        margin-left: 0.5rem;\n}\n.badges {\n        display: flex;\n        gap: 0.25rem;\n}\n.address {\n        margin-bottom: 0.25rem;\n        color: #555;\n}\n.contact {\n        font-size: 0.9rem;\n        color: #666;\n        margin-bottom: 0.25rem;\n}\n.labels {\n        font-size: 0.9rem;\n        color: #444;\n        margin-bottom: 0.5rem;\n}\n.tags {\n        display: flex;\n        flex-wrap: wrap;\n        gap: 0.5rem;\n}\n.tag {\n        font-size: 0.8rem;\n        padding: 0.3rem 0.5rem;\n        border-radius: 4px;\n        background-color: #f0f0f0;\n}\n.tag.utr {\n        background-color: #fef3c7;\n        border: 1px solid #facc15;\n}\n.tag.vat {\n        background-color: #dbeafe;\n        border: 1px solid #3b82f6;\n}\n.tag.reg {\n        background-color: #fee2e2;\n        border: 1px solid #ef4444;\n}\n";
 
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
@@ -18280,97 +18284,138 @@ const _export_sfc = (sfc, props) => {
 const _hoisted_1 = { class: "client-search" };
 const _hoisted_2 = {
   key: 0,
+  class: "selected"
+};
+const _hoisted_3 = {
+  key: 1,
+  class: "input-wrapper"
+};
+const _hoisted_4 = ["innerHTML"];
+const _hoisted_5 = ["innerHTML"];
+const _hoisted_6 = {
+  key: 2,
   class: "results"
 };
-const _hoisted_3 = ["onClick"];
-const _hoisted_4 = { class: "result-header" };
-const _hoisted_5 = { class: "name" };
-const _hoisted_6 = { class: "number" };
-const _hoisted_7 = { class: "address" };
-const _hoisted_8 = { class: "contact" };
-const _hoisted_9 = { class: "labels" };
-const _hoisted_10 = { class: "tags" };
-const _hoisted_11 = {
+const _hoisted_7 = ["onClick"];
+const _hoisted_8 = { class: "result-header" };
+const _hoisted_9 = { class: "name" };
+const _hoisted_10 = { class: "number" };
+const _hoisted_11 = { class: "address" };
+const _hoisted_12 = { class: "contact" };
+const _hoisted_13 = { class: "labels" };
+const _hoisted_14 = { class: "tags" };
+const _hoisted_15 = {
   key: 0,
   class: "tag utr"
 };
-const _hoisted_12 = {
+const _hoisted_16 = {
   key: 1,
   class: "tag vat"
 };
-const _hoisted_13 = {
+const _hoisted_17 = {
   key: 2,
   class: "tag reg"
 };
 
-
+    
 const _sfc_main = {
   __name: 'ClientSearch.ce',
   props: /*@__PURE__*/mergeModels({
-        results: Array,
+        results: {
+            type: Array,
+            default: () => ([]),
+        },
     }, {
-    "modelValue": {},
+    "modelValue": { default: '' },
     "modelModifiers": {},
+    "selected": { default: () => ({}) },
+    "selectedModifiers": {},
   }),
-  emits: /*@__PURE__*/mergeModels(['select'], ["update:modelValue"]),
-  setup(__props) {
+  emits: /*@__PURE__*/mergeModels(['select'], ["update:modelValue", "update:selected"]),
+  setup(__props, { emit: __emit }) {
 
     const model = useModel(__props, "modelValue");
+    const selected = useModel(__props, 'selected');
+
     
-    
+    const emit = __emit;
+
+    const resultsOpen = ref(false);
+
+    watch(model, (val) => {
+        if (val && val.length) { resultsOpen.value = true; }
+    }, { immediate: true });
+
+    const setSelected = (result) => {
+        selected.value = result;
+        resultsOpen.value = false;
+        emit('select', result);
+    };
 
 return (_ctx, _cache) => {
   return (openBlock(), createElementBlock("div", _hoisted_1, [
-    withDirectives(createBaseVNode("input", {
-      type: "text",
-      "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => ((model).value = $event)),
-      placeholder: "Search clients..."
-    }, null, 512), [
-      [vModelText, model.value]
-    ]),
-    (__props.results?.length)
-      ? (openBlock(), createElementBlock("ul", _hoisted_2, [
+    (selected.value.name)
+      ? (openBlock(), createElementBlock("div", _hoisted_2, toDisplayString(selected.value.name), 1))
+      : (openBlock(), createElementBlock("div", _hoisted_3, [
+          createBaseVNode("span", {
+            class: "icon",
+            innerHTML: unref(searchIcon)
+          }, null, 8, _hoisted_4),
+          withDirectives(createBaseVNode("input", {
+            type: "text",
+            "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => ((model).value = $event)),
+            placeholder: "Search..."
+          }, null, 512), [
+            [vModelText, model.value]
+          ]),
+          createBaseVNode("span", {
+            class: "icon bright-icon",
+            innerHTML: unref(brightIcon)
+          }, null, 8, _hoisted_5)
+        ])),
+    (resultsOpen.value)
+      ? (openBlock(), createElementBlock("ul", _hoisted_6, [
           (openBlock(true), createElementBlock(Fragment, null, renderList(__props.results, (result) => {
             return (openBlock(), createElementBlock("li", {
               key: result.number,
               class: "result-item",
-              onClick: $event => (_ctx.$emit('select', result))
+              onClick: $event => (setSelected(result))
             }, [
-              createBaseVNode("div", _hoisted_4, [
+              createBaseVNode("div", _hoisted_8, [
                 createBaseVNode("div", null, [
-                  createBaseVNode("strong", _hoisted_5, toDisplayString(result.name), 1),
-                  createBaseVNode("span", _hoisted_6, "(" + toDisplayString(result.number) + ")", 1)
+                  createBaseVNode("strong", _hoisted_9, toDisplayString(result.name), 1),
+                  createBaseVNode("span", _hoisted_10, "(" + toDisplayString(result.number) + ")", 1)
                 ]),
                 _cache[1] || (_cache[1] = createBaseVNode("div", { class: "badges" }, [
                   createBaseVNode("span", { class: "badge" }, "🟢"),
                   createBaseVNode("span", { class: "badge" }, "🔴")
                 ], -1))
               ]),
-              createBaseVNode("div", _hoisted_7, toDisplayString(result.address), 1),
-              createBaseVNode("div", _hoisted_8, [
+              createBaseVNode("div", _hoisted_11, toDisplayString(result.address), 1),
+              createBaseVNode("div", _hoisted_12, [
                 createBaseVNode("span", null, toDisplayString(result.email), 1),
                 _cache[2] || (_cache[2] = createTextVNode(" | ")),
                 createBaseVNode("span", null, toDisplayString(result.phone), 1),
                 _cache[3] || (_cache[3] = createTextVNode(" | ")),
                 createBaseVNode("span", null, toDisplayString(result.country), 1)
               ]),
-              createBaseVNode("div", _hoisted_9, [
+              createBaseVNode("div", _hoisted_13, [
                 createBaseVNode("strong", null, toDisplayString(result.type), 1),
                 _cache[4] || (_cache[4] = createTextVNode(" | ")),
                 createBaseVNode("strong", null, toDisplayString(result.category), 1)
               ]),
-              createBaseVNode("div", _hoisted_10, [
+              createBaseVNode("div", _hoisted_14, [
                 (result.utr)
-                  ? (openBlock(), createElementBlock("span", _hoisted_11, "UTR: " + toDisplayString(result.utr), 1))
+                  ? (openBlock(), createElementBlock("span", _hoisted_15, "UTR: " + toDisplayString(result.utr), 1))
                   : createCommentVNode("", true),
                 (result.vat)
-                  ? (openBlock(), createElementBlock("span", _hoisted_12, "VAT: " + toDisplayString(result.vat), 1))
+                  ? (openBlock(), createElementBlock("span", _hoisted_16, "VAT: " + toDisplayString(result.vat), 1))
                   : createCommentVNode("", true),
                 (result.reg)
-                  ? (openBlock(), createElementBlock("span", _hoisted_13, "REG: " + toDisplayString(result.reg), 1))
+                  ? (openBlock(), createElementBlock("span", _hoisted_17, "REG: " + toDisplayString(result.reg), 1))
                   : createCommentVNode("", true)
               ])
-            ], 8, _hoisted_3))
+            ], 8, _hoisted_7))
           }), 128))
         ]))
       : createCommentVNode("", true)
