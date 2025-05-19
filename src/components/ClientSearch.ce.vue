@@ -1,6 +1,6 @@
 <template>
     <div class="client-search">
-        <search-wrapper
+        <search-wrapper-ce
             v-model="model"
             v-model:selected="selected"
             v-model:open="open"
@@ -38,12 +38,12 @@
                     <span v-if="result.reg" class="tag reg">REG: {{ result.reg }}</span>
                 </div>
             </template>
-        </search-wrapper>
+        </search-wrapper-ce>
     </div>
 </template>
 
 <script setup>
-    import SearchWrapper from './ui/SearchWrapper.vue';
+    import SearchWrapperCe from './ui/SearchWrapper.ce.vue';
     import proposeIcon from '../assets/products/rounded/propose-logo.svg?raw';
     import managerIcon from '../assets/products/rounded/manager-logo.svg?raw';
 

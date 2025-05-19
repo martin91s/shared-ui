@@ -18273,6 +18273,8 @@ const brightIcon = "<svg width=\"8\" height=\"12\" viewBox=\"0 0 8 12\" fill=\"n
 
 const addIcon = "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <mask id=\"mask0_7736_621\" style=\"mask-type:alpha\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\">\n        <rect width=\"24\" height=\"24\" fill=\"#D9D9D9\"/>\n    </mask>\n    <g mask=\"url(#mask0_7736_621)\">\n        <path d=\"M11 13H5V11H11V5H13V11H19V13H13V19H11V13Z\" fill=\"#374151\"/>\n    </g>\n</svg>\n";
 
+const _style_0$1 = "\n.search-wrapper {\n&[data-v-4350980d] {\n        font-family: 'Open Sans', 'Segoe UI', sans-serif;\n}\n&.open {\ninput[data-v-4350980d] {\n                border-bottom-left-radius: 0;\n                border-bottom-right-radius: 0;\n}\n}\n}\nbutton[data-v-4350980d] {\n        cursor: pointer;\n}\n.selected {\n&[data-v-4350980d] {\n        border-radius: 4px;\n        background-color: #ffffff;\n        display: flex;\n        justify-content: space-between;\n        border: 1px solid #d1d5db;\n        align-items: center;\n}\n.selected-item[data-v-4350980d] {\n            padding: 0 8px;\n}\n.edit-button[data-v-4350980d] {\n            color: #007995;\n            background-color: inherit;\n            border: none;\n            font-weight: 600;\n            font-size: 12px;\n            margin-right: 12px;\n}\n.change-button[data-v-4350980d] {\n            background-color: #ffffff;\n            color: #007995;\n            padding: 9px 16px;\n            font-weight: 600;\n            border: 1px solid #007995;\n            font-size: 16px;\n}\n}\n.text-xs[data-v-4350980d] {\n        font-size: 12px;\n}\n.results[data-v-4350980d] {\n        border: 1px solid #d1d5db;\n        border-top: none;\n        background-color: #ffffff;\n        margin: 0;\n        border-radius: 0 0 4px 4px;\n        list-style: none;\n        padding: 12px;\n}\n.no-results {\n&[data-v-4350980d] {\n        padding: 0 8px;\n}\n.create[data-v-4350980d] {\n            color: #6b7280;\n            margin-bottom: 12px;\n}\n.create-button {\n&[data-v-4350980d] {\n            padding: 12px;\n            font-weight: 600;\n            background-color: #ffffff;\n            border: none;\n            display: inline-flex;\n            align-items: center;\n}\n.add-icon[data-v-4350980d] {\n                margin-right: 8px;\n}\n}\n}\n.input-wrapper {\n&[data-v-4350980d] {\n        position: relative;\n}\n.icon[data-v-4350980d] {\n            position: absolute;\n            top: 0;\n            left: 8px;\n            bottom: 0;\n            display: flex;\n            align-items: center;\n}\n.bright-icon[data-v-4350980d] {\n            left: unset;\n            right: 16px;\n}\ninput[data-v-4350980d] {\n            padding: 10px 36px;\n            width: 100%;\n            font-size: 1rem;\n            border: 1px solid #d1d5db;\n            border-radius: 4px;\n            box-sizing: border-box;\n}\n}\n.result-item[data-v-4350980d] {\n        padding: 12px;\n        background: #ffffff;\n        cursor: pointer;\n}\n";
+
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
   for (const [key, val] of props) {
@@ -18306,7 +18308,7 @@ const _hoisted_10$1 = ["onClick"];
 
     
 const _sfc_main$3 = {
-  __name: 'SearchWrapper',
+  __name: 'SearchWrapper.ce',
   props: /*@__PURE__*/mergeModels({
         results: {
             type: Array,
@@ -18411,13 +18413,13 @@ return (_ctx, _cache) => {
 }
 
 };
-const SearchWrapper = /*#__PURE__*/_export_sfc(_sfc_main$3, [['__scopeId',"data-v-facb0566"]]);
+const SearchWrapperCeComponent = /*#__PURE__*/_export_sfc(_sfc_main$3, [['styles',[_style_0$1]],['__scopeId',"data-v-4350980d"]]);
 
 const proposeIcon = "<svg width=\"22\" height=\"22\" viewBox=\"0 0 22 22\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"1.25\" y=\"1.25\" width=\"19.5\" height=\"19.5\" rx=\"9.75\" stroke=\"white\" stroke-width=\"1.5\"/>\n    <path d=\"M2 11C2 15.9706 6.02944 20 11 20C15.9706 20 20 15.9706 20 11C20 6.02944 15.9706 2 11 2C6.02944 2 2 6.02944 2 11Z\" fill=\"#DB015F\"/>\n    <path d=\"M8 14.0131V7.28919L10.2068 6V13.3402L8.5205 14.3074C8.48188 14.3318 8.43864 14.348 8.39349 14.355C8.34833 14.3619 8.30223 14.3595 8.25805 14.3479C8.21387 14.3362 8.17256 14.3156 8.13671 14.2873C8.10085 14.259 8.07121 14.2236 8.04964 14.1833C8.01851 14.1306 8.00142 14.0708 8 14.0096V14.0131Z\" fill=\"white\"/>\n    <path d=\"M13.8276 14.1585L10.7528 15.9441C10.7022 15.9804 10.6414 16 10.5791 16C10.5167 16 10.456 15.9804 10.4054 15.9441L8.17374 14.6549C8.22437 14.6913 8.28513 14.7108 8.34747 14.7108C8.40981 14.7108 8.47058 14.6913 8.52121 14.6549L12.1448 12.5715L13.8311 13.5387C13.8709 13.5608 13.9058 13.5907 13.9337 13.6266C13.9616 13.6626 13.9819 13.7037 13.9935 13.7477C14.0051 13.7917 14.0077 13.8376 14.0011 13.8826C13.9945 13.9276 13.9789 13.9708 13.9552 14.0096C13.9304 14.0805 13.8843 14.1089 13.8311 14.1585H13.8276Z\" fill=\"white\"/>\n    <path d=\"M14.3013 13.6876C14.3011 13.6271 14.2849 13.5677 14.2544 13.5154C14.2239 13.4631 14.1802 13.4198 14.1276 13.3898L11.323 11.778V9.19887L14.1254 10.8355C14.1759 10.8678 14.218 10.9117 14.2482 10.9635C14.2784 11.0153 14.2959 11.0735 14.2992 11.1334L14.3013 13.6876Z\" fill=\"white\"/>\n</svg>\n";
 
 const managerIcon = "<svg width=\"22\" height=\"22\" viewBox=\"0 0 22 22\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"1.25\" y=\"1.25\" width=\"19.5\" height=\"19.5\" rx=\"9.75\" stroke=\"white\" stroke-width=\"1.5\"/>\n    <path d=\"M2 11C2 15.9706 6.02944 20 11 20C15.9706 20 20 15.9706 20 11C20 6.02944 15.9706 2 11 2C6.02944 2 2 6.02944 2 11Z\" fill=\"#00893F\"/>\n    <path d=\"M8 14.0131V7.28919L10.2068 6V13.3402L8.5205 14.3074C8.48188 14.3318 8.43864 14.348 8.39349 14.355C8.34833 14.3619 8.30223 14.3595 8.25805 14.3479C8.21387 14.3362 8.17256 14.3156 8.13671 14.2873C8.10085 14.259 8.07121 14.2236 8.04964 14.1833C8.01851 14.1306 8.00142 14.0708 8 14.0096V14.0131Z\" fill=\"white\"/>\n    <path d=\"M13.8276 14.1585L10.7528 15.9441C10.7022 15.9804 10.6414 16 10.5791 16C10.5167 16 10.456 15.9804 10.4054 15.9441L8.17374 14.6549C8.22437 14.6913 8.28513 14.7108 8.34747 14.7108C8.40981 14.7108 8.47058 14.6913 8.52121 14.6549L12.1448 12.5715L13.8311 13.5387C13.8709 13.5608 13.9058 13.5907 13.9337 13.6266C13.9616 13.6626 13.9819 13.7037 13.9935 13.7477C14.0051 13.7917 14.0077 13.8376 14.0011 13.8826C13.9945 13.9276 13.9789 13.9708 13.9552 14.0096C13.9304 14.0805 13.8843 14.1089 13.8311 14.1585H13.8276Z\" fill=\"white\"/>\n    <path d=\"M14.3013 13.6876C14.3011 13.6271 14.2849 13.5677 14.2544 13.5154C14.2239 13.4631 14.1802 13.4198 14.1276 13.3898L11.323 11.778V9.19887L14.1254 10.8355C14.1759 10.8678 14.218 10.9117 14.2482 10.9635C14.2784 11.0153 14.2959 11.0735 14.2992 11.1334L14.3013 13.6876Z\" fill=\"white\"/>\n</svg>\n";
 
-const _style_0 = "\n.result-header {\n&[data-v-f79a8cb0] {\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        margin-bottom: 8px;\n}\n.name[data-v-f79a8cb0] {\n            font-weight: 600;\n            margin-right: 4px;\n            color: #080e1b;\n}\n.number[data-v-f79a8cb0] {\n            color: #4b5563;\n            font-size: 14px;\n}\n.badges {\n&[data-v-f79a8cb0] {\n            display: flex;\n}\n.badge[data-v-f79a8cb0] {\n                margin-left: -10px;\n}\nsvg[data-v-f79a8cb0] {\n                width: 14px;\n                height: 14px;\n}\n}\n}\n.client-details {\n&[data-v-f79a8cb0] {\n        font-size: 12px;\n        color: #4b5563;\n        margin-bottom: 16px;\n}\n.address[data-v-f79a8cb0] {\n            margin-bottom: 4px;\n}\n}\n.labels[data-v-f79a8cb0] {\n        color: #1f2937;\n        font-size: 12px;\n        margin-bottom: 12px;\n}\n.tags {\n&[data-v-f79a8cb0] {\n        display: flex;\n        flex-wrap: wrap;\n        gap: 8px;\n}\n.tag {\n&[data-v-f79a8cb0] {\n            font-size: 12px;\n            padding: 5px 6px;\n            border-radius: 4px;\n            background-color: #f0f0f0;\n            line-height: 1;\n            color: #1f2937;\n}\n&.utr[data-v-f79a8cb0] {\n                background: linear-gradient(0deg, rgba(255, 211, 159, 0.25) 0%, rgba(255, 211, 159, 0.25) 100%), #fff;\n                border: 1px solid #ffd39f;\n}\n&.vat[data-v-f79a8cb0] {\n                background: linear-gradient(0deg, rgba(157, 223, 238, 0.25) 0%, rgba(157, 223, 238, 0.25) 100%), #fff;\n                border: 1px solid #9ddfee;\n}\n&.reg[data-v-f79a8cb0] {\n                background: linear-gradient(0deg, rgba(238, 157, 158, 0.25) 0%, rgba(238, 157, 158, 0.25) 100%), #fff;\n                border: 1px solid #ffadad;\n}\n}\n}\n";
+const _style_0 = "\n.result-header {\n&[data-v-1a42dfc4] {\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        margin-bottom: 8px;\n}\n.name[data-v-1a42dfc4] {\n            font-weight: 600;\n            margin-right: 4px;\n            color: #080e1b;\n}\n.number[data-v-1a42dfc4] {\n            color: #4b5563;\n            font-size: 14px;\n}\n.badges {\n&[data-v-1a42dfc4] {\n            display: flex;\n}\n.badge[data-v-1a42dfc4] {\n                margin-left: -10px;\n}\nsvg[data-v-1a42dfc4] {\n                width: 14px;\n                height: 14px;\n}\n}\n}\n.client-details {\n&[data-v-1a42dfc4] {\n        font-size: 12px;\n        color: #4b5563;\n        margin-bottom: 16px;\n}\n.address[data-v-1a42dfc4] {\n            margin-bottom: 4px;\n}\n}\n.labels[data-v-1a42dfc4] {\n        color: #1f2937;\n        font-size: 12px;\n        margin-bottom: 12px;\n}\n.tags {\n&[data-v-1a42dfc4] {\n        display: flex;\n        flex-wrap: wrap;\n        gap: 8px;\n}\n.tag {\n&[data-v-1a42dfc4] {\n            font-size: 12px;\n            padding: 5px 6px;\n            border-radius: 4px;\n            background-color: #f0f0f0;\n            line-height: 1;\n            color: #1f2937;\n}\n&.utr[data-v-1a42dfc4] {\n                background: linear-gradient(0deg, rgba(255, 211, 159, 0.25) 0%, rgba(255, 211, 159, 0.25) 100%), #fff;\n                border: 1px solid #ffd39f;\n}\n&.vat[data-v-1a42dfc4] {\n                background: linear-gradient(0deg, rgba(157, 223, 238, 0.25) 0%, rgba(157, 223, 238, 0.25) 100%), #fff;\n                border: 1px solid #9ddfee;\n}\n&.reg[data-v-1a42dfc4] {\n                background: linear-gradient(0deg, rgba(238, 157, 158, 0.25) 0%, rgba(238, 157, 158, 0.25) 100%), #fff;\n                border: 1px solid #ffadad;\n}\n}\n}\n";
 
 const _hoisted_1$2 = { class: "client-search" };
 const _hoisted_2 = { class: "result-header" };
@@ -18471,7 +18473,7 @@ const _sfc_main$2 = {
 
 return (_ctx, _cache) => {
   return (openBlock(), createElementBlock("div", _hoisted_1$2, [
-    createVNode(SearchWrapper, {
+    createVNode(SearchWrapperCeComponent, {
       modelValue: model.value,
       "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => ((model).value = $event)),
       selected: selected.value,
@@ -18531,7 +18533,7 @@ return (_ctx, _cache) => {
 }
 
 };
-const ClientSearchCeComponent = /*#__PURE__*/_export_sfc(_sfc_main$2, [['styles',[_style_0]],['__scopeId',"data-v-f79a8cb0"]]);
+const ClientSearchCeComponent = /*#__PURE__*/_export_sfc(_sfc_main$2, [['styles',[_style_0]],['__scopeId',"data-v-1a42dfc4"]]);
 
 const _hoisted_1$1 = { class: "address-search" };
 
@@ -18559,7 +18561,7 @@ const _sfc_main$1 = {
 
 return (_ctx, _cache) => {
   return (openBlock(), createElementBlock("div", _hoisted_1$1, [
-    createVNode(SearchWrapper, {
+    createVNode(SearchWrapperCeComponent, {
       modelValue: model.value,
       "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => ((model).value = $event)),
       selected: selected.value,
@@ -18603,7 +18605,7 @@ const _sfc_main = {
 
 return (_ctx, _cache) => {
   return (openBlock(), createElementBlock("div", _hoisted_1, [
-    createVNode(SearchWrapper, {
+    createVNode(SearchWrapperCeComponent, {
       modelValue: model.value,
       "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => ((model).value = $event)),
       selected: selected.value,
@@ -18624,10 +18626,12 @@ return (_ctx, _cache) => {
 const ClientSearch = defineCustomElement(ClientSearchCeComponent);
 const AddressSearch = defineCustomElement(_sfc_main$1);
 const PersonSearch = defineCustomElement(_sfc_main);
+const SearchWrapper = defineCustomElement(SearchWrapperCeComponent);
 
 if (typeof window !== 'undefined') {
     customElements.define('client-search', ClientSearch);
     customElements.define('address-search', AddressSearch);
     customElements.define('person-search', PersonSearch);
+    customElements.define('search-wrapper', SearchWrapper);
 }
 //# sourceMappingURL=index.js.map

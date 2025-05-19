@@ -29,7 +29,7 @@ const results = [
     },
 ];
 export default {
-    title: 'Search/ClientSearchCe',
+    title: 'Search/ClientSearch',
     component: ClientSearchCe,
     argTypes: {
         modelValue: { control: 'text' },
