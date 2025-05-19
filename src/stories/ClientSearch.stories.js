@@ -1,4 +1,4 @@
-import ClientSearchCe from '../components/ClientSearch.ce.vue';
+import ClientSearch from '../components/ClientSearch.vue';
 
 const results = [
     {
@@ -29,8 +29,8 @@ const results = [
     },
 ];
 export default {
-    title: 'ClientSearch',
-    component: ClientSearchCe,
+    title: 'Search/ClientSearch',
+    component: ClientSearch,
     argTypes: {
         modelValue: { control: 'text' },
         results: { control: 'object' },
@@ -46,9 +46,18 @@ export const Default = {};
 
 export const WithResults = {
     args: {
-        modelValue: "Acme",
+        open: true,
+        modelValue: 'Acme',
     },
 };
+
+export const noResults = {
+    args: {
+        results: [],
+        open: true,
+        modelValue: 'ABC ltd',
+    },
+}
 
 export const Selected = {
     args: {

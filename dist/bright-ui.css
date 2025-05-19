@@ -1,0 +1,182 @@
+
+.search-wrapper {
+&[data-v-facb0566] {
+        font-family: 'Open Sans', 'Segoe UI', sans-serif;
+}
+&.open {
+input[data-v-facb0566] {
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+}
+}
+}
+button[data-v-facb0566] {
+        cursor: pointer;
+}
+.selected {
+&[data-v-facb0566] {
+        border-radius: 4px;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid #d1d5db;
+        align-items: center;
+}
+.selected-item[data-v-facb0566] {
+            padding: 0 8px;
+}
+.edit-button[data-v-facb0566] {
+            color: #007995;
+            background-color: inherit;
+            border: none;
+            font-weight: 600;
+            font-size: 12px;
+            margin-right: 12px;
+}
+.change-button[data-v-facb0566] {
+            background-color: #ffffff;
+            color: #007995;
+            padding: 9px 16px;
+            font-weight: 600;
+            border: 1px solid #007995;
+            font-size: 16px;
+}
+}
+.text-xs[data-v-facb0566] {
+        font-size: 12px;
+}
+.results[data-v-facb0566] {
+        border: 1px solid #d1d5db;
+        border-top: none;
+        background-color: #ffffff;
+        margin: 0;
+        border-radius: 0 0 4px 4px;
+        list-style: none;
+        padding: 12px;
+}
+.no-results {
+&[data-v-facb0566] {
+        padding: 0 8px;
+}
+.create[data-v-facb0566] {
+            color: #6b7280;
+            margin-bottom: 12px;
+}
+.create-button {
+&[data-v-facb0566] {
+            padding: 12px;
+            font-weight: 600;
+            background-color: #ffffff;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+}
+.add-icon[data-v-facb0566] {
+                margin-right: 8px;
+}
+}
+}
+.input-wrapper {
+&[data-v-facb0566] {
+        position: relative;
+}
+.icon[data-v-facb0566] {
+            position: absolute;
+            top: 0;
+            left: 8px;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+}
+.bright-icon[data-v-facb0566] {
+            left: unset;
+            right: 16px;
+}
+input[data-v-facb0566] {
+            padding: 10px 36px;
+            width: 100%;
+            font-size: 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            box-sizing: border-box;
+}
+}
+.result-item[data-v-facb0566] {
+        padding: 12px;
+        background: #ffffff;
+        cursor: pointer;
+}
+
+.result-header {
+&[data-v-ad5a6ea2] {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+}
+.name[data-v-ad5a6ea2] {
+            font-weight: 600;
+            margin-right: 4px;
+            color: #080e1b;
+}
+.number[data-v-ad5a6ea2] {
+            color: #4b5563;
+            font-size: 14px;
+}
+.badges {
+&[data-v-ad5a6ea2] {
+            display: flex;
+}
+.badge[data-v-ad5a6ea2] {
+                margin-left: -10px;
+}
+svg[data-v-ad5a6ea2] {
+                width: 14px;
+                height: 14px;
+}
+}
+}
+.client-details {
+&[data-v-ad5a6ea2] {
+        font-size: 12px;
+        color: #4b5563;
+        margin-bottom: 16px;
+}
+.address[data-v-ad5a6ea2] {
+            margin-bottom: 4px;
+}
+}
+.labels[data-v-ad5a6ea2] {
+        color: #1f2937;
+        font-size: 12px;
+        margin-bottom: 12px;
+}
+.tags {
+&[data-v-ad5a6ea2] {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+}
+.tag {
+&[data-v-ad5a6ea2] {
+            font-size: 12px;
+            padding: 5px 6px;
+            border-radius: 4px;
+            background-color: #f0f0f0;
+            line-height: 1;
+            color: #1f2937;
+}
+&.utr[data-v-ad5a6ea2] {
+                background: linear-gradient(0deg, rgba(255, 211, 159, 0.25) 0%, rgba(255, 211, 159, 0.25) 100%), #fff;
+                border: 1px solid #ffd39f;
+}
+&.vat[data-v-ad5a6ea2] {
+                background: linear-gradient(0deg, rgba(157, 223, 238, 0.25) 0%, rgba(157, 223, 238, 0.25) 100%), #fff;
+                border: 1px solid #9ddfee;
+}
+&.reg[data-v-ad5a6ea2] {
+                background: linear-gradient(0deg, rgba(238, 157, 158, 0.25) 0%, rgba(238, 157, 158, 0.25) 100%), #fff;
+                border: 1px solid #ffadad;
+}
+}
+}

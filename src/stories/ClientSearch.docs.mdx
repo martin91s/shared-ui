@@ -1,18 +1,126 @@
-import { Meta, Title, Stories, } from '@storybook/blocks';
+import { Meta, Title, Stories,   } from '@storybook/blocks';
 import * as ClientSearchStories from './ClientSearch.stories';
 
 <Meta of={ClientSearchStories} />
 <Title />
 A reusable Web Component for client search boxes, dropdowns, and selection.
 
-### Usage
-In your html
-```vue
-<client-search
-    @search-input="searchInput"
-    @selected="clientSelected"
-    :results="searchResults"
-/>
+# Usage
+
+### Vue
+```html
+<template>
+    <client-search
+        v-model="value"
+        v-model:selected="selected"
+        v-model:open="open"
+        :results="results"
+    />
+</template>
+
+<script setup>
+    import { ref, watch } from 'vue';
+
+    const value = ref('');
+    const selected = ref({});
+    const open = ref(false);
+    const results = ref([]);
+
+    // Watch the input value and fetch results dynamically
+    watch(value, async (newValue) => {
+        if (newValue && newValue.length >= 2) {
+            results.value = await fetchResults(newValue);
+        } else {
+            results.value = [];
+        }
+    });
+
+    async function fetchResults(query) {
+        // Simulate an API call (replace this with your real fetch)
+        return [
+            { name: 'Acme Ltd', number: '1234567890' },
+            { name: 'Beta Corp', number: '9876543210' }
+        ].filter((item) =>
+            item.name.toLowerCase().includes(query.toLowerCase())
+        );
+    }
+</script>
 ```
 
-<Stories />
+### React
+```jsx
+import { useEffect, useRef } from 'react';
+
+export function ClientSearchExample() {
+    const ref = useRef();
+
+    useEffect(() => {
+        const el = ref.current;
+
+        async function fetchResults(query) {
+            return [
+                { name: 'Acme Ltd', number: '1234567890' },
+                { name: 'Beta Corp', number: '9876543210' }
+            ].filter((item) =>
+                item.name.toLowerCase().includes(query.toLowerCase())
+            );
+        }
+
+        const handleInput = async (e) => {
+            const query = e.detail;
+            if (query.length >= 2) {
+                el.results = await fetchResults(query);
+            } else {
+                el.results = [];
+            }
+        };
+
+        const handleSelect = (e) => {
+            console.log('Selected client:', e.detail);
+        };
+
+        el.addEventListener('update:modelValue', handleInput);
+        el.addEventListener('select', handleSelect);
+
+        return () => {
+            el.removeEventListener('update:modelValue', handleInput);
+            el.removeEventListener('select', handleSelect);
+        };
+    }, []);
+
+    return <client-search ref={ref}></client-search>;
+}
+
+```
+### HTML / JavaScript
+
+```html
+<client-search id="clientSearch"></client-search>
+
+<script>
+    const el = document.getElementById('clientSearch');
+
+    async function fetchResults(query) {
+        // Simulate an API call
+        return [
+            { name: 'Acme Ltd', number: '1234567890' },
+            { name: 'Beta Corp', number: '9876543210' }
+        ].filter((item) =>
+            item.name.toLowerCase().includes(query.toLowerCase())
+        );
+    }
+
+    el.addEventListener('update:modelValue', async (e) => {
+        const query = e.detail;
+        if (query.length >= 2) {
+            el.results = await fetchResults(query);
+        } else {
+            el.results = [];
+        }
+    });
+
+    el.addEventListener('select', (e) => {
+        console.log('Selected client:', e.detail);
+    });
+</script>
+```

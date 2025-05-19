@@ -1,0 +1,29 @@
+import { Meta, Title, Subtitle } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+<Title>Welcome to Bright Shared UI</Title>
+<Subtitle>A collection of reusable web components for frontend apps</Subtitle>
+
+This guide explains how to include the component library via CDN or NPM and use Web Components in any frontend framework.
+
+### Usage via CDN
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/@brightsg/bright-shared-ui/dist/index.js"></script>
+```
+
+### Usage via NPM
+
+```bash
+npm install @brightsg/bright-ui
+```
+
+Somewhere in your project import the below
+```html
+import '@brightsg/bright-ui/dist/index.js';
+```
+
+You can now use the components like:
+```html
+<client-search></client-search>
+```
