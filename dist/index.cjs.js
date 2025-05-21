@@ -18279,19 +18279,23 @@ ${codeFrame}` : message);
 
   const addIcon = "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <mask id=\"mask0_7736_621\" style=\"mask-type:alpha\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\">\n        <rect width=\"24\" height=\"24\" fill=\"#D9D9D9\"/>\n    </mask>\n    <g mask=\"url(#mask0_7736_621)\">\n        <path d=\"M11 13H5V11H11V5H13V11H19V13H13V19H11V13Z\" fill=\"#374151\"/>\n    </g>\n</svg>\n";
 
+  const modalCss = ".confirm-modal {\n    padding: 32px;\n    border: none;\n    border-radius: 8px;\n    width: 450px;\n    box-shadow: 2px 16px 40px 0 rgba(134, 133, 131, 0.80);\n    font-family: 'Open Sans', 'Segoe UI', sans-serif;\n}\n\n.confirm-modal h3 {\n    font-weight: 600;\n    line-height: 32px;\n    font-size: 24px;\n    margin: 0 0 4px;\n    color: #b2000b;\n    font-family: 'Museo Sans', sans-serif;\n}\n\n.confirm-modal p {\n    margin: 0 0 24px;\n    color: #080e1b;\n    line-height: 24px;\n}\n\n.confirm-modal .actions {\n    display: flex;\n    justify-content: flex-end;\n    gap: 16px;\n}\n\n.confirm-modal button {\n    padding: 12px 24px;\n    font-weight: 600;\n    border: none;\n    border-radius: 4px;\n    cursor: pointer;\n    font-size: 16px;\n}\n\n.confirm-modal #confirm {\n    background-color: inherit;\n    color: #b2000b;\n    padding: 12px 8px;\n\n    &:focus-visible {\n        outline: none;\n    }\n}\n\n.confirm-modal #dismiss {\n    background-color: #b2000b;\n    color: white;\n}\n";
+
   function confirmModal({ title, description }) {
+      injectModalStyles();
+
       return new Promise((resolve) => {
           const modal = document.createElement('dialog');
           modal.classList.add('confirm-modal');
 
           modal.innerHTML = `
-          <h3>${ title }</h3>
-          <p>${ description }</p>
-          <div class="actions">
-              <button id="confirm">Confirm</button>
-              <button id="dismiss">Dismiss</button>
-          </div>
-        `;
+      <h3>${ title }</h3>
+      <p>${ description }</p>
+      <div class="actions">
+          <button id="confirm">Confirm</button>
+          <button id="dismiss">Dismiss</button>
+      </div>
+    `;
 
           document.body.appendChild(modal);
           modal.showModal();
@@ -18308,6 +18312,15 @@ ${codeFrame}` : message);
               modal.remove();
           });
       });
+  }
+
+  function injectModalStyles() {
+      if (document.getElementById('modal-css')) return;
+
+      const style = document.createElement('style');
+      style.id = 'modal-css';
+      style.textContent = modalCss;
+      document.head.appendChild(style);
   }
 
   const _style_0$4 = "\n.search-wrapper {\n&[data-v-52a17ed4] {\n        font-family: 'Open Sans', 'Segoe UI', sans-serif;\n}\n&.open {\ninput[data-v-52a17ed4] {\n                border-bottom-left-radius: 0;\n                border-bottom-right-radius: 0;\n}\n}\n}\nbutton[data-v-52a17ed4] {\n        cursor: pointer;\n}\n.selected {\n&[data-v-52a17ed4] {\n        border-radius: 4px;\n        background-color: #ffffff;\n        display: flex;\n        justify-content: space-between;\n        border: 1px solid #d1d5db;\n        align-items: center;\n}\n.selected-item[data-v-52a17ed4] {\n            padding: 0 8px;\n}\n.edit-button[data-v-52a17ed4] {\n            color: #007995;\n            background-color: inherit;\n            border: none;\n            font-weight: 600;\n            font-size: 12px;\n            margin-right: 12px;\n}\n.change-button[data-v-52a17ed4] {\n            background-color: #ffffff;\n            color: #007995;\n            padding: 9px 16px;\n            font-weight: 600;\n            border: 1px solid #007995;\n            font-size: 16px;\n}\n}\n.text-xs[data-v-52a17ed4] {\n        font-size: 12px;\n}\n.results[data-v-52a17ed4] {\n        border: 1px solid #d1d5db;\n        border-top: none;\n        background-color: #ffffff;\n        border-radius: 0 0 4px 4px;\n        padding: 12px;\n}\n.no-results {\n&[data-v-52a17ed4] {\n        padding: 0 8px;\n}\n.create[data-v-52a17ed4] {\n            color: #6b7280;\n            margin-bottom: 12px;\n}\n.create-button {\n&[data-v-52a17ed4] {\n            padding: 12px;\n            font-weight: 600;\n            background-color: #ffffff;\n            border: none;\n            display: inline-flex;\n            align-items: center;\n}\n.add-icon[data-v-52a17ed4] {\n                margin-right: 8px;\n}\n}\n}\n.input-wrapper {\n&[data-v-52a17ed4] {\n        position: relative;\n}\n.icon[data-v-52a17ed4] {\n            position: absolute;\n            top: 0;\n            left: 8px;\n            bottom: 0;\n            display: flex;\n            align-items: center;\n}\n.bright-icon[data-v-52a17ed4] {\n            left: unset;\n            right: 16px;\n}\ninput[data-v-52a17ed4] {\n            padding: 10px 36px;\n            width: 100%;\n            font-size: 1rem;\n            border: 1px solid #d1d5db;\n            border-radius: 4px;\n            box-sizing: border-box;\n}\n}\n";
