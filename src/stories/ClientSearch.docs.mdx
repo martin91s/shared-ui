@@ -11,10 +11,10 @@ A reusable Web Component for client search boxes, dropdowns, and selection.
 ```html
 <template>
     <client-search
-        v-model="value"
-        v-model:selected="selected"
-        v-model:open="open"
-        :results="results"
+        :modelValue="clientSearch"
+        @update:modelValue="$event => (clientSearch = $event.detail[0])"
+        :results="filteredResults"
+        @selected="setSelected"
     />
 </template>
 
@@ -26,23 +26,19 @@ A reusable Web Component for client search boxes, dropdowns, and selection.
     const open = ref(false);
     const results = ref([]);
 
-    // Watch the input value and fetch results dynamically
-    watch(value, async (newValue) => {
-        if (newValue && newValue.length >= 2) {
-            results.value = await fetchResults(newValue);
-        } else {
-            results.value = [];
-        }
-    });
+    watch(clientSearch, fetchResults);
 
-    async function fetchResults(query) {
+    async function fetchResults() {
         // Simulate an API call (replace this with your real fetch)
-        return [
-            { name: 'Acme Ltd', number: '1234567890' },
-            { name: 'Beta Corp', number: '9876543210' }
-        ].filter((item) =>
-            item.name.toLowerCase().includes(query.toLowerCase())
-        );
+        if (clientSearch.value.length >= 2) {
+            results.value = return [
+                { name: 'Acme Ltd', number: '1234567890' },
+                { name: 'Beta Corp', number: '9876543210' }
+            ].filter((item) =>
+                item.name.toLowerCase().includes(query.toLowerCase())
+            );
+        }
+        results.value = [];
     }
 </script>
 ```
@@ -111,7 +107,7 @@ export function ClientSearchExample() {
     }
 
     el.addEventListener('update:modelValue', async (e) => {
-        const query = e.detail;
+        const query = e.detail[0];
         if (query.length >= 2) {
             el.results = await fetchResults(query);
         } else {

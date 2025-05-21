@@ -1,14 +1,14 @@
 <template>
     <div :class="{ open }" class="search-wrapper">
-        <div v-if="selected.name" class="selected">
+        <div v-if="Object.keys(selected).length" class="selected">
             <div class="selected-item">
-                {{ selected.name }}
+                <slot name="selected" />
             </div>
             <div class="action-buttons">
-                <button class="edit-button">
+                <button class="edit-button" @click="edit">
                     Edit
                 </button>
-                <button class="change-button" @click="setSelected({})">
+                <button class="change-button" @click="selected = {}">
                     Change
                 </button>
             </div>
@@ -22,23 +22,16 @@
             />
             <span class="icon bright-icon" v-html="brightIcon" />
         </div>
-        <ul v-if="open" class="results">
-            <li v-if="!results.length" class="no-results">
+        <div v-if="open" class="results">
+            <div v-if="!results.length" class="no-results">
                 <p class="create text-xs">Create new</p>
                 <button @click="createItem" class="create-button">
                     <span v-html="addIcon" class="add-icon" />
                     {{ model }}
                 </button>
-            </li>
-            <li
-                v-for="result in results"
-                :key="result.number"
-                class="result-item"
-                @click="setSelected(result)"
-            >
-                <slot :result="result" />
-            </li>
-        </ul>
+            </div>
+            <slot />
+        </div>
     </div>
 </template>
 
@@ -46,6 +39,7 @@
     import searchIcon from '../../assets/icons/search.svg?raw';
     import brightIcon from '../../assets/icons/bright-b.svg?raw';
     import addIcon from '../../assets/icons/add.svg?raw';
+    import { confirmModal } from '../../modalService.js';
 
     import { watch } from 'vue';
 
@@ -60,17 +54,21 @@
     const selected = defineModel('selected', { default: () => ({}) });
     const open = defineModel('open', { default: false });
 
-    const emit = defineEmits(['select']);
-
     watch(model, (val) => {
         if (val && val.length > 2) { return open.value = true; }
         open.value = false;
     }, { immediate: true });
 
-    const setSelected = (result) => {
-        selected.value = result;
-        open.value = false;
-        emit('select', result);
+
+    const edit = async () => {
+        const confirmed = await confirmModal({
+            title: 'Edit client name',
+            description: 'You can edit your selected client to change its information. Once you save the changes, it will be updated within BrightClient.',
+        });
+
+        if (confirmed) {
+            console.log('Client edited');
+        }
     };
 
     const createItem = () => {
@@ -133,9 +131,7 @@
         border: 1px solid #d1d5db;
         border-top: none;
         background-color: #ffffff;
-        margin: 0;
         border-radius: 0 0 4px 4px;
-        list-style: none;
         padding: 12px;
     }
 
@@ -186,11 +182,5 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
-    }
-
-    .result-item {
-        padding: 12px;
-        background: #ffffff;
-        cursor: pointer;
     }
 </style>

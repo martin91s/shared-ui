@@ -1,0 +1,26 @@
+import { Meta, Title, Subtitle } from '@storybook/blocks';
+import * as ConfirmModalStories from './ConfirmModal.stories';
+
+<Meta of={ConfirmModalStories} />
+
+<Title>Confirm Modal</Title>
+<Subtitle>Programmatic modal for framework-agnostic or Web Component use</Subtitle>
+
+The `confirmModal` is a lightweight, framework-agnostic utility for displaying confirmation dialogs.
+It works natively with Web Components and can be called from anywhere using a simple JavaScript function.
+
+# Usage
+
+```js
+import { openModal } from '@brightsg/bright-ui';
+
+const confirmed = await confirmModal({
+    title: 'Delete client',
+    description: 'Are you sure you want to delete this client?',
+});
+
+if (confirmed) {
+    console.log('Client deleted');
+}
+```
+

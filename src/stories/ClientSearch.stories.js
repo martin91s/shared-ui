@@ -1,4 +1,5 @@
-import ClientSearchCe from '../components/ClientSearch.ce.vue';
+import ClientSearch from '../components/dropdown/ClientSearch.ce.vue';
+import { userEvent, within } from '@storybook/test';
 
 const results = [
     {
@@ -29,8 +30,8 @@ const results = [
     },
 ];
 export default {
-    title: 'Search/ClientSearch',
-    component: ClientSearchCe,
+    title: 'Dropdown/ClientSearch',
+    component: ClientSearch,
     argTypes: {
         modelValue: { control: 'text' },
         results: { control: 'object' },
@@ -62,5 +63,23 @@ export const noResults = {
 export const Selected = {
     args: {
         selected: results[0],
+    },
+};
+
+export const SelectedEdit = {
+    ...Selected,
+    name: 'Selected/With Edit',
+    args: {
+        ...Selected.args,
+    },
+    play: async ({ canvasElement }) => {
+        const canvas = within(canvasElement);
+        const editButton = await canvas.getByText('Edit');
+        await userEvent.click(editButton);
+
+        return () => {
+            const modal = document.querySelector('dialog.confirm-modal');
+            if (modal) modal.remove();
+        };
     },
 };

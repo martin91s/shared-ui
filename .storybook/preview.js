@@ -1,6 +1,7 @@
 /** @type { import('@storybook/vue3').Preview } */
 import { injectStyles } from './styles';
 import IntroductionTemplate from '../src/stories/Introduction.mdx';
+import '../src/assets/main.css';
 
 const modules = import.meta.glob('../src/components/**/*.ce.vue', { eager: true });
 
@@ -8,15 +9,25 @@ Object.values(modules).forEach((component) => {
     injectStyles(component.default);
 });
 
+const removeDanglingModals = () => {
+    document.querySelectorAll('dialog.confirm-modal')?.forEach((modal) => {
+        try {
+            modal.close?.();
+            modal.remove?.();
+        } catch (e) {
+            console.warn('Failed to close modal:', e);
+        }
+    });
+};
+
 const preview = {
-    parameters: {
-        backgrounds: {
-            values: [
-                { name: 'Light', value: '#f9fafb' },
-                { name: 'Dark', value: '#333333' },
-            ],
-            default: 'Light',
+    decorators: [
+        (Story) => {
+            removeDanglingModals();
+            return Story();
         },
+    ],
+    parameters: {
         controls: {
             matchers: {
                 color: /(background|color)$/i,
