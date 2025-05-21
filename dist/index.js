@@ -18273,7 +18273,38 @@ const brightIcon = "<svg width=\"8\" height=\"12\" viewBox=\"0 0 8 12\" fill=\"n
 
 const addIcon = "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <mask id=\"mask0_7736_621\" style=\"mask-type:alpha\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\">\n        <rect width=\"24\" height=\"24\" fill=\"#D9D9D9\"/>\n    </mask>\n    <g mask=\"url(#mask0_7736_621)\">\n        <path d=\"M11 13H5V11H11V5H13V11H19V13H13V19H11V13Z\" fill=\"#374151\"/>\n    </g>\n</svg>\n";
 
-const _style_0$1 = "\n.search-wrapper {\n&[data-v-4350980d] {\n        font-family: 'Open Sans', 'Segoe UI', sans-serif;\n}\n&.open {\ninput[data-v-4350980d] {\n                border-bottom-left-radius: 0;\n                border-bottom-right-radius: 0;\n}\n}\n}\nbutton[data-v-4350980d] {\n        cursor: pointer;\n}\n.selected {\n&[data-v-4350980d] {\n        border-radius: 4px;\n        background-color: #ffffff;\n        display: flex;\n        justify-content: space-between;\n        border: 1px solid #d1d5db;\n        align-items: center;\n}\n.selected-item[data-v-4350980d] {\n            padding: 0 8px;\n}\n.edit-button[data-v-4350980d] {\n            color: #007995;\n            background-color: inherit;\n            border: none;\n            font-weight: 600;\n            font-size: 12px;\n            margin-right: 12px;\n}\n.change-button[data-v-4350980d] {\n            background-color: #ffffff;\n            color: #007995;\n            padding: 9px 16px;\n            font-weight: 600;\n            border: 1px solid #007995;\n            font-size: 16px;\n}\n}\n.text-xs[data-v-4350980d] {\n        font-size: 12px;\n}\n.results[data-v-4350980d] {\n        border: 1px solid #d1d5db;\n        border-top: none;\n        background-color: #ffffff;\n        margin: 0;\n        border-radius: 0 0 4px 4px;\n        list-style: none;\n        padding: 12px;\n}\n.no-results {\n&[data-v-4350980d] {\n        padding: 0 8px;\n}\n.create[data-v-4350980d] {\n            color: #6b7280;\n            margin-bottom: 12px;\n}\n.create-button {\n&[data-v-4350980d] {\n            padding: 12px;\n            font-weight: 600;\n            background-color: #ffffff;\n            border: none;\n            display: inline-flex;\n            align-items: center;\n}\n.add-icon[data-v-4350980d] {\n                margin-right: 8px;\n}\n}\n}\n.input-wrapper {\n&[data-v-4350980d] {\n        position: relative;\n}\n.icon[data-v-4350980d] {\n            position: absolute;\n            top: 0;\n            left: 8px;\n            bottom: 0;\n            display: flex;\n            align-items: center;\n}\n.bright-icon[data-v-4350980d] {\n            left: unset;\n            right: 16px;\n}\ninput[data-v-4350980d] {\n            padding: 10px 36px;\n            width: 100%;\n            font-size: 1rem;\n            border: 1px solid #d1d5db;\n            border-radius: 4px;\n            box-sizing: border-box;\n}\n}\n.result-item[data-v-4350980d] {\n        padding: 12px;\n        background: #ffffff;\n        cursor: pointer;\n}\n";
+function confirmModal({ title, description }) {
+    return new Promise((resolve) => {
+        const modal = document.createElement('dialog');
+        modal.classList.add('confirm-modal');
+
+        modal.innerHTML = `
+          <h3>${ title }</h3>
+          <p>${ description }</p>
+          <div class="actions">
+              <button id="confirm">Confirm</button>
+              <button id="dismiss">Dismiss</button>
+          </div>
+        `;
+
+        document.body.appendChild(modal);
+        modal.showModal();
+
+        modal.querySelector('#confirm')?.addEventListener('click', () => {
+            resolve(true);
+            modal.close();
+            modal.remove();
+        });
+
+        modal.querySelector('#dismiss')?.addEventListener('click', () => {
+            resolve(false);
+            modal.close();
+            modal.remove();
+        });
+    });
+}
+
+const _style_0$4 = "\n.search-wrapper {\n&[data-v-52a17ed4] {\n        font-family: 'Open Sans', 'Segoe UI', sans-serif;\n}\n&.open {\ninput[data-v-52a17ed4] {\n                border-bottom-left-radius: 0;\n                border-bottom-right-radius: 0;\n}\n}\n}\nbutton[data-v-52a17ed4] {\n        cursor: pointer;\n}\n.selected {\n&[data-v-52a17ed4] {\n        border-radius: 4px;\n        background-color: #ffffff;\n        display: flex;\n        justify-content: space-between;\n        border: 1px solid #d1d5db;\n        align-items: center;\n}\n.selected-item[data-v-52a17ed4] {\n            padding: 0 8px;\n}\n.edit-button[data-v-52a17ed4] {\n            color: #007995;\n            background-color: inherit;\n            border: none;\n            font-weight: 600;\n            font-size: 12px;\n            margin-right: 12px;\n}\n.change-button[data-v-52a17ed4] {\n            background-color: #ffffff;\n            color: #007995;\n            padding: 9px 16px;\n            font-weight: 600;\n            border: 1px solid #007995;\n            font-size: 16px;\n}\n}\n.text-xs[data-v-52a17ed4] {\n        font-size: 12px;\n}\n.results[data-v-52a17ed4] {\n        border: 1px solid #d1d5db;\n        border-top: none;\n        background-color: #ffffff;\n        border-radius: 0 0 4px 4px;\n        padding: 12px;\n}\n.no-results {\n&[data-v-52a17ed4] {\n        padding: 0 8px;\n}\n.create[data-v-52a17ed4] {\n            color: #6b7280;\n            margin-bottom: 12px;\n}\n.create-button {\n&[data-v-52a17ed4] {\n            padding: 12px;\n            font-weight: 600;\n            background-color: #ffffff;\n            border: none;\n            display: inline-flex;\n            align-items: center;\n}\n.add-icon[data-v-52a17ed4] {\n                margin-right: 8px;\n}\n}\n}\n.input-wrapper {\n&[data-v-52a17ed4] {\n        position: relative;\n}\n.icon[data-v-52a17ed4] {\n            position: absolute;\n            top: 0;\n            left: 8px;\n            bottom: 0;\n            display: flex;\n            align-items: center;\n}\n.bright-icon[data-v-52a17ed4] {\n            left: unset;\n            right: 16px;\n}\ninput[data-v-52a17ed4] {\n            padding: 10px 36px;\n            width: 100%;\n            font-size: 1rem;\n            border: 1px solid #d1d5db;\n            border-radius: 4px;\n            box-sizing: border-box;\n}\n}\n";
 
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
@@ -18283,31 +18314,30 @@ const _export_sfc = (sfc, props) => {
   return target;
 };
 
-const _hoisted_1$3 = {
+const _hoisted_1$5 = {
   key: 0,
   class: "selected"
 };
-const _hoisted_2$1 = { class: "selected-item" };
-const _hoisted_3$1 = { class: "action-buttons" };
-const _hoisted_4$1 = {
+const _hoisted_2$4 = { class: "selected-item" };
+const _hoisted_3$3 = { class: "action-buttons" };
+const _hoisted_4$3 = {
   key: 1,
   class: "input-wrapper"
 };
-const _hoisted_5$1 = ["innerHTML"];
-const _hoisted_6$1 = ["innerHTML"];
-const _hoisted_7$1 = {
+const _hoisted_5$3 = ["innerHTML"];
+const _hoisted_6$2 = ["innerHTML"];
+const _hoisted_7$2 = {
   key: 2,
   class: "results"
 };
-const _hoisted_8$1 = {
+const _hoisted_8$2 = {
   key: 0,
   class: "no-results"
 };
 const _hoisted_9$1 = ["innerHTML"];
-const _hoisted_10$1 = ["onClick"];
 
     
-const _sfc_main$3 = {
+const _sfc_main$5 = {
   __name: 'SearchWrapper.ce',
   props: /*@__PURE__*/mergeModels({
         results: {
@@ -18322,8 +18352,8 @@ const _sfc_main$3 = {
     "open": { default: false },
     "openModifiers": {},
   }),
-  emits: /*@__PURE__*/mergeModels(['select'], ["update:modelValue", "update:selected", "update:open"]),
-  setup(__props, { emit: __emit }) {
+  emits: ["update:modelValue", "update:selected", "update:open"],
+  setup(__props) {
 
     
 
@@ -18331,17 +18361,21 @@ const _sfc_main$3 = {
     const selected = useModel(__props, 'selected');
     const open = useModel(__props, 'open');
 
-    const emit = __emit;
-
     watch(model, (val) => {
         if (val && val.length > 2) { return open.value = true; }
         open.value = false;
     }, { immediate: true });
 
-    const setSelected = (result) => {
-        selected.value = result;
-        open.value = false;
-        emit('select', result);
+
+    const edit = async () => {
+        const confirmed = await confirmModal({
+            title: 'Edit client name',
+            description: 'You can edit your selected client to change its information. Once you save the changes, it will be updated within BrightClient.',
+        });
+
+        if (confirmed) {
+            console.log('Client edited');
+        }
     };
 
     const createItem = () => {
@@ -18352,22 +18386,27 @@ return (_ctx, _cache) => {
   return (openBlock(), createElementBlock("div", {
     class: normalizeClass([{ open: open.value }, "search-wrapper"])
   }, [
-    (selected.value.name)
-      ? (openBlock(), createElementBlock("div", _hoisted_1$3, [
-          createBaseVNode("div", _hoisted_2$1, toDisplayString(selected.value.name), 1),
-          createBaseVNode("div", _hoisted_3$1, [
-            _cache[2] || (_cache[2] = createBaseVNode("button", { class: "edit-button" }, " Edit ", -1)),
+    (Object.keys(selected.value).length)
+      ? (openBlock(), createElementBlock("div", _hoisted_1$5, [
+          createBaseVNode("div", _hoisted_2$4, [
+            renderSlot(_ctx.$slots, "selected", {}, undefined, true)
+          ]),
+          createBaseVNode("div", _hoisted_3$3, [
+            createBaseVNode("button", {
+              class: "edit-button",
+              onClick: edit
+            }, " Edit "),
             createBaseVNode("button", {
               class: "change-button",
-              onClick: _cache[0] || (_cache[0] = $event => (setSelected({})))
+              onClick: _cache[0] || (_cache[0] = $event => (selected.value = {}))
             }, " Change ")
           ])
         ]))
-      : (openBlock(), createElementBlock("div", _hoisted_4$1, [
+      : (openBlock(), createElementBlock("div", _hoisted_4$3, [
           createBaseVNode("span", {
             class: "icon",
             innerHTML: unref(searchIcon)
-          }, null, 8, _hoisted_5$1),
+          }, null, 8, _hoisted_5$3),
           withDirectives(createBaseVNode("input", {
             type: "text",
             "onUpdate:modelValue": _cache[1] || (_cache[1] = $event => ((model).value = $event)),
@@ -18378,13 +18417,13 @@ return (_ctx, _cache) => {
           createBaseVNode("span", {
             class: "icon bright-icon",
             innerHTML: unref(brightIcon)
-          }, null, 8, _hoisted_6$1)
+          }, null, 8, _hoisted_6$2)
         ])),
     (open.value)
-      ? (openBlock(), createElementBlock("ul", _hoisted_7$1, [
+      ? (openBlock(), createElementBlock("div", _hoisted_7$2, [
           (!__props.results.length)
-            ? (openBlock(), createElementBlock("li", _hoisted_8$1, [
-                _cache[3] || (_cache[3] = createBaseVNode("p", { class: "create text-xs" }, "Create new", -1)),
+            ? (openBlock(), createElementBlock("div", _hoisted_8$2, [
+                _cache[2] || (_cache[2] = createBaseVNode("p", { class: "create text-xs" }, "Create new", -1)),
                 createBaseVNode("button", {
                   onClick: createItem,
                   class: "create-button"
@@ -18397,15 +18436,7 @@ return (_ctx, _cache) => {
                 ])
               ]))
             : createCommentVNode("", true),
-          (openBlock(true), createElementBlock(Fragment, null, renderList(__props.results, (result) => {
-            return (openBlock(), createElementBlock("li", {
-              key: result.number,
-              class: "result-item",
-              onClick: $event => (setSelected(result))
-            }, [
-              renderSlot(_ctx.$slots, "default", { result: result }, undefined, true)
-            ], 8, _hoisted_10$1))
-          }), 128))
+          renderSlot(_ctx.$slots, "default", {}, undefined, true)
         ]))
       : createCommentVNode("", true)
   ], 2))
@@ -18413,38 +18444,129 @@ return (_ctx, _cache) => {
 }
 
 };
-const SearchWrapperCeComponent = /*#__PURE__*/_export_sfc(_sfc_main$3, [['styles',[_style_0$1]],['__scopeId',"data-v-4350980d"]]);
+const SearchWrapper = /*#__PURE__*/_export_sfc(_sfc_main$5, [['styles',[_style_0$4]],['__scopeId',"data-v-52a17ed4"]]);
+
+const _style_0$3 = "\n.info-tags {\n&[data-v-3ff05809] {\n        display: flex;\n        flex-wrap: wrap;\n        gap: 8px;\n}\n.badge {\n&[data-v-3ff05809] {\n            font-size: 12px;\n            padding: 5px 6px;\n            border-radius: 4px;\n            background-color: #f0f0f0;\n            line-height: 1;\n            text-transform: uppercase;\n            color: #1f2937;\n            border: 1px solid;\n}\n&.badge-utr[data-v-3ff05809] {\n                background: linear-gradient(0deg, rgba(255, 211, 159, 0.25) 0%, rgba(255, 211, 159, 0.25) 100%), #fff;\n                border-color: #ffd39f;\n}\n&.badge-vat[data-v-3ff05809] {\n                background: linear-gradient(0deg, rgba(157, 223, 238, 0.25) 0%, rgba(157, 223, 238, 0.25) 100%), #fff;\n                border-color: #9ddfee;\n}\n&.badge-reg[data-v-3ff05809] {\n                background: linear-gradient(0deg, rgba(238, 157, 158, 0.25) 0%, rgba(238, 157, 158, 0.25) 100%), #fff;\n                border-color: #ffadad;\n}\n&.badge-ni[data-v-3ff05809] {\n                background-color: rgba(165, 245, 202, 0.25);\n                border-color: #a5f5ca;\n}\n&.badge-dob[data-v-3ff05809] {\n                background: #f3f4f6;\n                border-color: #d1d5db;\n}\n}\n}\n";
+
+const _hoisted_1$4 = { class: "info-tags" };
+
+    
+const _sfc_main$4 = {
+  __name: 'InfoTags.ce',
+  props: {
+        data: {
+            type: Object,
+            default: () => ({}),
+        },
+        resultType: {
+            type: String,
+            default: '',
+        },
+    },
+  setup(__props) {
+
+    const props = __props;
+
+    const computedTags = computed(() => {
+        const data = props.data || {};
+
+        const tagFields = {
+            client: ['utr', 'vat', 'reg'],
+            person: ['ni', 'dob', 'utr', 'vat'],
+        };
+
+        const keys = tagFields[props.resultType] || [];
+
+        return keys
+            .map(key => (data[key] ? { label: key, value: data[key] } : null))
+            .filter(Boolean);
+    });
+
+return (_ctx, _cache) => {
+  return (openBlock(), createElementBlock("div", _hoisted_1$4, [
+    (openBlock(true), createElementBlock(Fragment, null, renderList(computedTags.value, (tag, index) => {
+      return (openBlock(), createElementBlock("span", {
+        key: index,
+        class: normalizeClass(["badge", `badge-${ tag.label.toLowerCase()} `])
+      }, toDisplayString(tag.label) + ": " + toDisplayString(tag.value), 3))
+    }), 128))
+  ]))
+}
+}
+
+};
+const InfoTags = /*#__PURE__*/_export_sfc(_sfc_main$4, [['styles',[_style_0$3]],['__scopeId',"data-v-3ff05809"]]);
 
 const proposeIcon = "<svg width=\"22\" height=\"22\" viewBox=\"0 0 22 22\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"1.25\" y=\"1.25\" width=\"19.5\" height=\"19.5\" rx=\"9.75\" stroke=\"white\" stroke-width=\"1.5\"/>\n    <path d=\"M2 11C2 15.9706 6.02944 20 11 20C15.9706 20 20 15.9706 20 11C20 6.02944 15.9706 2 11 2C6.02944 2 2 6.02944 2 11Z\" fill=\"#DB015F\"/>\n    <path d=\"M8 14.0131V7.28919L10.2068 6V13.3402L8.5205 14.3074C8.48188 14.3318 8.43864 14.348 8.39349 14.355C8.34833 14.3619 8.30223 14.3595 8.25805 14.3479C8.21387 14.3362 8.17256 14.3156 8.13671 14.2873C8.10085 14.259 8.07121 14.2236 8.04964 14.1833C8.01851 14.1306 8.00142 14.0708 8 14.0096V14.0131Z\" fill=\"white\"/>\n    <path d=\"M13.8276 14.1585L10.7528 15.9441C10.7022 15.9804 10.6414 16 10.5791 16C10.5167 16 10.456 15.9804 10.4054 15.9441L8.17374 14.6549C8.22437 14.6913 8.28513 14.7108 8.34747 14.7108C8.40981 14.7108 8.47058 14.6913 8.52121 14.6549L12.1448 12.5715L13.8311 13.5387C13.8709 13.5608 13.9058 13.5907 13.9337 13.6266C13.9616 13.6626 13.9819 13.7037 13.9935 13.7477C14.0051 13.7917 14.0077 13.8376 14.0011 13.8826C13.9945 13.9276 13.9789 13.9708 13.9552 14.0096C13.9304 14.0805 13.8843 14.1089 13.8311 14.1585H13.8276Z\" fill=\"white\"/>\n    <path d=\"M14.3013 13.6876C14.3011 13.6271 14.2849 13.5677 14.2544 13.5154C14.2239 13.4631 14.1802 13.4198 14.1276 13.3898L11.323 11.778V9.19887L14.1254 10.8355C14.1759 10.8678 14.218 10.9117 14.2482 10.9635C14.2784 11.0153 14.2959 11.0735 14.2992 11.1334L14.3013 13.6876Z\" fill=\"white\"/>\n</svg>\n";
 
 const managerIcon = "<svg width=\"22\" height=\"22\" viewBox=\"0 0 22 22\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"1.25\" y=\"1.25\" width=\"19.5\" height=\"19.5\" rx=\"9.75\" stroke=\"white\" stroke-width=\"1.5\"/>\n    <path d=\"M2 11C2 15.9706 6.02944 20 11 20C15.9706 20 20 15.9706 20 11C20 6.02944 15.9706 2 11 2C6.02944 2 2 6.02944 2 11Z\" fill=\"#00893F\"/>\n    <path d=\"M8 14.0131V7.28919L10.2068 6V13.3402L8.5205 14.3074C8.48188 14.3318 8.43864 14.348 8.39349 14.355C8.34833 14.3619 8.30223 14.3595 8.25805 14.3479C8.21387 14.3362 8.17256 14.3156 8.13671 14.2873C8.10085 14.259 8.07121 14.2236 8.04964 14.1833C8.01851 14.1306 8.00142 14.0708 8 14.0096V14.0131Z\" fill=\"white\"/>\n    <path d=\"M13.8276 14.1585L10.7528 15.9441C10.7022 15.9804 10.6414 16 10.5791 16C10.5167 16 10.456 15.9804 10.4054 15.9441L8.17374 14.6549C8.22437 14.6913 8.28513 14.7108 8.34747 14.7108C8.40981 14.7108 8.47058 14.6913 8.52121 14.6549L12.1448 12.5715L13.8311 13.5387C13.8709 13.5608 13.9058 13.5907 13.9337 13.6266C13.9616 13.6626 13.9819 13.7037 13.9935 13.7477C14.0051 13.7917 14.0077 13.8376 14.0011 13.8826C13.9945 13.9276 13.9789 13.9708 13.9552 14.0096C13.9304 14.0805 13.8843 14.1089 13.8311 14.1585H13.8276Z\" fill=\"white\"/>\n    <path d=\"M14.3013 13.6876C14.3011 13.6271 14.2849 13.5677 14.2544 13.5154C14.2239 13.4631 14.1802 13.4198 14.1276 13.3898L11.323 11.778V9.19887L14.1254 10.8355C14.1759 10.8678 14.218 10.9117 14.2482 10.9635C14.2784 11.0153 14.2959 11.0735 14.2992 11.1334L14.3013 13.6876Z\" fill=\"white\"/>\n</svg>\n";
 
-const _style_0 = "\n.result-header {\n&[data-v-1a42dfc4] {\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        margin-bottom: 8px;\n}\n.name[data-v-1a42dfc4] {\n            font-weight: 600;\n            margin-right: 4px;\n            color: #080e1b;\n}\n.number[data-v-1a42dfc4] {\n            color: #4b5563;\n            font-size: 14px;\n}\n.badges {\n&[data-v-1a42dfc4] {\n            display: flex;\n}\n.badge[data-v-1a42dfc4] {\n                margin-left: -10px;\n}\nsvg[data-v-1a42dfc4] {\n                width: 14px;\n                height: 14px;\n}\n}\n}\n.client-details {\n&[data-v-1a42dfc4] {\n        font-size: 12px;\n        color: #4b5563;\n        margin-bottom: 16px;\n}\n.address[data-v-1a42dfc4] {\n            margin-bottom: 4px;\n}\n}\n.labels[data-v-1a42dfc4] {\n        color: #1f2937;\n        font-size: 12px;\n        margin-bottom: 12px;\n}\n.tags {\n&[data-v-1a42dfc4] {\n        display: flex;\n        flex-wrap: wrap;\n        gap: 8px;\n}\n.tag {\n&[data-v-1a42dfc4] {\n            font-size: 12px;\n            padding: 5px 6px;\n            border-radius: 4px;\n            background-color: #f0f0f0;\n            line-height: 1;\n            color: #1f2937;\n}\n&.utr[data-v-1a42dfc4] {\n                background: linear-gradient(0deg, rgba(255, 211, 159, 0.25) 0%, rgba(255, 211, 159, 0.25) 100%), #fff;\n                border: 1px solid #ffd39f;\n}\n&.vat[data-v-1a42dfc4] {\n                background: linear-gradient(0deg, rgba(157, 223, 238, 0.25) 0%, rgba(157, 223, 238, 0.25) 100%), #fff;\n                border: 1px solid #9ddfee;\n}\n&.reg[data-v-1a42dfc4] {\n                background: linear-gradient(0deg, rgba(238, 157, 158, 0.25) 0%, rgba(238, 157, 158, 0.25) 100%), #fff;\n                border: 1px solid #ffadad;\n}\n}\n}\n";
+const _style_0$2 = "\n.search-result-item {\n&[data-v-88024452] {\n        padding: 12px;\n        background: #ffffff;\n        cursor: pointer;\n        transition: background-color 0.2s ease, border-radius 0.2s ease;\n}\n&[data-v-88024452]:hover {\n            background: #f9fafb;\n            border-radius: 8px;\n}\n}\n.result-header {\n&[data-v-88024452] {\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        margin-bottom: 8px;\n}\n.title[data-v-88024452] {\n            font-weight: 600;\n            margin-right: 4px;\n            color: #080e1b;\n}\n.badges {\n&[data-v-88024452] {\n            display: flex;\n}\n.badge[data-v-88024452] {\n                margin-left: -10px;\n}\nsvg[data-v-88024452] {\n                width: 14px;\n                height: 14px;\n}\n}\n}\n.result-detail[data-v-88024452] {\n        font-size: 12px;\n        color: #4b5563;\n}\n.additional-detail[data-v-88024452] {\n        margin-top: 16px;\n}\n";
+
+const _hoisted_1$3 = { class: "search-result-item" };
+const _hoisted_2$3 = { class: "result-header" };
+const _hoisted_3$2 = { class: "title" };
+const _hoisted_4$2 = { class: "badges" };
+const _hoisted_5$2 = ["innerHTML"];
+const _hoisted_6$1 = ["innerHTML"];
+const _hoisted_7$1 = { class: "result-detail" };
+const _hoisted_8$1 = {
+  key: 0,
+  class: "additional-detail"
+};
+
+    
+const _sfc_main$3 = {
+  __name: 'SearchResultItem.ce',
+  props: {
+        result: {
+            type: Object,
+            default: () => ({}),
+        },
+    },
+  setup(__props) {
+
+    
+
+return (_ctx, _cache) => {
+  return (openBlock(), createElementBlock("div", _hoisted_1$3, [
+    createBaseVNode("div", _hoisted_2$3, [
+      createBaseVNode("div", _hoisted_3$2, [
+        renderSlot(_ctx.$slots, "header", {}, undefined, true)
+      ]),
+      createBaseVNode("div", _hoisted_4$2, [
+        createBaseVNode("span", {
+          class: "badge",
+          innerHTML: unref(proposeIcon)
+        }, null, 8, _hoisted_5$2),
+        createBaseVNode("span", {
+          class: "badge",
+          innerHTML: unref(managerIcon)
+        }, null, 8, _hoisted_6$1)
+      ])
+    ]),
+    createBaseVNode("div", _hoisted_7$1, [
+      renderSlot(_ctx.$slots, "detail", {}, undefined, true)
+    ]),
+    (_ctx.$slots['additional-detail'])
+      ? (openBlock(), createElementBlock("div", _hoisted_8$1, [
+          renderSlot(_ctx.$slots, "additional-detail", {}, undefined, true)
+        ]))
+      : createCommentVNode("", true)
+  ]))
+}
+}
+
+};
+const SearchResultItem = /*#__PURE__*/_export_sfc(_sfc_main$3, [['styles',[_style_0$2]],['__scopeId',"data-v-88024452"]]);
+
+const _style_0$1 = "\n.number[data-v-d3c0714f] {\n        color: #4b5563;\n        font-weight: 400;\n        font-size: 14px;\n}\n.address[data-v-d3c0714f] {\n        margin-bottom: 4px;\n}\n.labels[data-v-d3c0714f] {\n        color: #1f2937;\n        font-size: 12px;\n        margin-bottom: 12px;\n}\n";
 
 const _hoisted_1$2 = { class: "client-search" };
-const _hoisted_2 = { class: "result-header" };
-const _hoisted_3 = { class: "name" };
-const _hoisted_4 = { class: "number" };
-const _hoisted_5 = { class: "badges" };
-const _hoisted_6 = ["innerHTML"];
-const _hoisted_7 = ["innerHTML"];
-const _hoisted_8 = { class: "client-details" };
-const _hoisted_9 = { class: "address" };
-const _hoisted_10 = { class: "contact" };
-const _hoisted_11 = { class: "labels" };
-const _hoisted_12 = { class: "tags" };
-const _hoisted_13 = {
-  key: 0,
-  class: "tag utr"
-};
-const _hoisted_14 = {
-  key: 1,
-  class: "tag vat"
-};
-const _hoisted_15 = {
-  key: 2,
-  class: "tag reg"
-};
+const _hoisted_2$2 = { class: "number" };
+const _hoisted_3$1 = { class: "address" };
+const _hoisted_4$1 = { class: "contact" };
+const _hoisted_5$1 = { class: "labels" };
 
     
 const _sfc_main$2 = {
@@ -18462,8 +18584,8 @@ const _sfc_main$2 = {
     "open": { default: false },
     "openModifiers": {},
   }),
-  emits: ["update:modelValue", "update:selected", "update:open"],
-  setup(__props) {
+  emits: /*@__PURE__*/mergeModels(['select'], ["update:modelValue", "update:selected", "update:open"]),
+  setup(__props, { emit: __emit }) {
 
     const model = useModel(__props, "modelValue");
     const selected = useModel(__props, 'selected');
@@ -18471,9 +18593,17 @@ const _sfc_main$2 = {
 
     
 
+    const emit = __emit;
+
+    const setSelected = (result) => {
+        selected.value = result;
+        open.value = false;
+        emit('select', result);
+    };
+
 return (_ctx, _cache) => {
   return (openBlock(), createElementBlock("div", _hoisted_1$2, [
-    createVNode(SearchWrapperCeComponent, {
+    createVNode(SearchWrapper, {
       modelValue: model.value,
       "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => ((model).value = $event)),
       selected: selected.value,
@@ -18482,49 +18612,44 @@ return (_ctx, _cache) => {
       "onUpdate:open": _cache[2] || (_cache[2] = $event => ((open).value = $event)),
       results: __props.results
     }, {
-      default: withCtx(({ result }) => [
-        createBaseVNode("div", _hoisted_2, [
-          createBaseVNode("div", null, [
-            createBaseVNode("strong", _hoisted_3, toDisplayString(result.name), 1),
-            createBaseVNode("span", _hoisted_4, "(" + toDisplayString(result.number) + ")", 1)
-          ]),
-          createBaseVNode("div", _hoisted_5, [
-            createBaseVNode("span", {
-              class: "badge",
-              innerHTML: unref(proposeIcon)
-            }, null, 8, _hoisted_6),
-            createBaseVNode("span", {
-              class: "badge",
-              innerHTML: unref(managerIcon)
-            }, null, 8, _hoisted_7)
-          ])
-        ]),
-        createBaseVNode("div", _hoisted_8, [
-          createBaseVNode("div", _hoisted_9, toDisplayString(result.address), 1),
-          createBaseVNode("div", _hoisted_10, [
-            createBaseVNode("span", null, toDisplayString(result.email), 1),
-            _cache[3] || (_cache[3] = createTextVNode(" | ")),
-            createBaseVNode("span", null, toDisplayString(result.phone), 1),
-            _cache[4] || (_cache[4] = createTextVNode(" | ")),
-            createBaseVNode("span", null, toDisplayString(result.country), 1)
-          ])
-        ]),
-        createBaseVNode("div", _hoisted_11, [
-          createBaseVNode("strong", null, toDisplayString(result.type), 1),
-          _cache[5] || (_cache[5] = createTextVNode(" | ")),
-          createBaseVNode("strong", null, toDisplayString(result.category), 1)
-        ]),
-        createBaseVNode("div", _hoisted_12, [
-          (result.utr)
-            ? (openBlock(), createElementBlock("span", _hoisted_13, "UTR: " + toDisplayString(result.utr), 1))
-            : createCommentVNode("", true),
-          (result.vat)
-            ? (openBlock(), createElementBlock("span", _hoisted_14, "VAT: " + toDisplayString(result.vat), 1))
-            : createCommentVNode("", true),
-          (result.reg)
-            ? (openBlock(), createElementBlock("span", _hoisted_15, "REG: " + toDisplayString(result.reg), 1))
-            : createCommentVNode("", true)
-        ])
+      selected: withCtx(() => [
+        createTextVNode(toDisplayString(selected.value.name), 1)
+      ]),
+      default: withCtx(() => [
+        (openBlock(true), createElementBlock(Fragment, null, renderList(__props.results, (result) => {
+          return (openBlock(), createBlock(SearchResultItem, {
+            key: result.number,
+            result: result,
+            onClick: $event => (setSelected(result))
+          }, {
+            header: withCtx(() => [
+              createTextVNode(toDisplayString(result.name) + " ", 1),
+              createBaseVNode("span", _hoisted_2$2, "(" + toDisplayString(result.number) + ")", 1)
+            ]),
+            detail: withCtx(() => [
+              createBaseVNode("div", _hoisted_3$1, toDisplayString(result.address), 1),
+              createBaseVNode("div", _hoisted_4$1, [
+                createBaseVNode("span", null, toDisplayString(result.email), 1),
+                _cache[3] || (_cache[3] = createTextVNode(" | ")),
+                createBaseVNode("span", null, toDisplayString(result.phone), 1),
+                _cache[4] || (_cache[4] = createTextVNode(" | ")),
+                createBaseVNode("span", null, toDisplayString(result.country), 1)
+              ])
+            ]),
+            "additional-detail": withCtx(() => [
+              createBaseVNode("div", _hoisted_5$1, [
+                createBaseVNode("strong", null, toDisplayString(result.type), 1),
+                _cache[5] || (_cache[5] = createTextVNode(" | ")),
+                createBaseVNode("strong", null, toDisplayString(result.category), 1)
+              ]),
+              createVNode(InfoTags, {
+                "result-type": "client",
+                data: result
+              }, null, 8, ["data"])
+            ]),
+            _: 2
+          }, 1032, ["result", "onClick"]))
+        }), 128))
       ]),
       _: 1
     }, 8, ["modelValue", "selected", "open", "results"])
@@ -18533,9 +18658,10 @@ return (_ctx, _cache) => {
 }
 
 };
-const ClientSearchCeComponent = /*#__PURE__*/_export_sfc(_sfc_main$2, [['styles',[_style_0]],['__scopeId',"data-v-1a42dfc4"]]);
+const ClientSearchCeComponent = /*#__PURE__*/_export_sfc(_sfc_main$2, [['styles',[_style_0$1]],['__scopeId',"data-v-d3c0714f"]]);
 
 const _hoisted_1$1 = { class: "address-search" };
+const _hoisted_2$1 = { class: "address" };
 
     
 const _sfc_main$1 = {
@@ -18551,26 +18677,51 @@ const _sfc_main$1 = {
     "selected": { default: () => ({}) },
     "selectedModifiers": {},
   }),
-  emits: ["update:modelValue", "update:selected"],
-  setup(__props) {
+  emits: /*@__PURE__*/mergeModels(['select'], ["update:modelValue", "update:selected"]),
+  setup(__props, { emit: __emit }) {
 
     const model = useModel(__props, "modelValue");
     const selected = useModel(__props, 'selected');
 
     
 
+    const emit = __emit;
+
+    const setSelected = (result) => {
+        selected.value = result;
+        open.value = false;
+        emit('select', result);
+    };
+
 return (_ctx, _cache) => {
   return (openBlock(), createElementBlock("div", _hoisted_1$1, [
-    createVNode(SearchWrapperCeComponent, {
+    createVNode(SearchWrapper, {
       modelValue: model.value,
       "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => ((model).value = $event)),
       selected: selected.value,
       "onUpdate:selected": _cache[1] || (_cache[1] = $event => ((selected).value = $event)),
       results: __props.results
     }, {
-      default: withCtx(({ result }) => _cache[2] || (_cache[2] = [
-        createTextVNode(" person search ")
-      ])),
+      selected: withCtx(() => [
+        createTextVNode(toDisplayString(selected.value.addressLine1), 1)
+      ]),
+      default: withCtx(() => [
+        (openBlock(true), createElementBlock(Fragment, null, renderList(__props.results, (result, i) => {
+          return (openBlock(), createBlock(SearchResultItem, {
+            key: i,
+            result: result,
+            onClick: $event => (setSelected(result))
+          }, {
+            header: withCtx(() => [
+              createTextVNode(toDisplayString(result.addressLine1), 1)
+            ]),
+            detail: withCtx(() => [
+              createBaseVNode("div", _hoisted_2$1, toDisplayString(result.addressLine2) + ", " + toDisplayString(result.city) + ", " + toDisplayString(result.postcode) + ", " + toDisplayString(result.county) + ", " + toDisplayString(result.country), 1)
+            ]),
+            _: 2
+          }, 1032, ["result", "onClick"]))
+        }), 128))
+      ]),
       _: 1
     }, 8, ["modelValue", "selected", "results"])
   ]))
@@ -18579,8 +18730,21 @@ return (_ctx, _cache) => {
 
 };
 
-const _hoisted_1 = { class: "person-search" };
+const _style_0 = "\n.results-header[data-v-273e90fa] {\n        color: #6b7280;\n        font-size: 12px;\n        margin-bottom: 12px;\n        padding: 4px;\n}\n.suggested-results[data-v-273e90fa] {\n        margin: 0 -12px;\n        padding: 0 12px 12px;\n        border-bottom: 1px solid #d1d5db;\n}\n.other-results[data-v-273e90fa] {\n        margin-top: 16px;\n}\n.address[data-v-273e90fa],\n    .contact[data-v-273e90fa] {\n        margin-bottom: 4px;\n}\n[data-v-273e90fa] .search-result-item {\n.result-header {\n            margin-bottom: 0;\n}\n}\n";
 
+const _hoisted_1 = { class: "person-search" };
+const _hoisted_2 = { class: "suggested-results" };
+const _hoisted_3 = { class: "results-header" };
+const _hoisted_4 = { class: "address" };
+const _hoisted_5 = { class: "contact" };
+const _hoisted_6 = { class: "company-details" };
+const _hoisted_7 = { key: 0 };
+const _hoisted_8 = { class: "other-results" };
+const _hoisted_9 = { class: "results-header" };
+const _hoisted_10 = { class: "address" };
+const _hoisted_11 = { class: "contact" };
+const _hoisted_12 = { class: "company-details" };
+const _hoisted_13 = { key: 0 };
     
 const _sfc_main = {
   __name: 'PersonSearch.ce',
@@ -18588,6 +18752,10 @@ const _sfc_main = {
         results: {
             type: Array,
             default: () => ([]),
+        },
+        clientId: {
+            type: Number,
+            default: 0,
         },
     }, {
     "modelValue": { default: '' },
@@ -18601,20 +18769,102 @@ const _sfc_main = {
     const model = useModel(__props, "modelValue");
     const selected = useModel(__props, 'selected');
 
-    
+    const props = __props;
+
+    const suggestedResults = computed(() =>
+        props.results.filter((person) => person.clientId === props.clientId)
+    );
+
+    const otherResults = computed(() =>
+        props.results.filter((person) => person.clientId !== props.clientId)
+    );
 
 return (_ctx, _cache) => {
   return (openBlock(), createElementBlock("div", _hoisted_1, [
-    createVNode(SearchWrapperCeComponent, {
+    createVNode(SearchWrapper, {
       modelValue: model.value,
       "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => ((model).value = $event)),
       selected: selected.value,
       "onUpdate:selected": _cache[1] || (_cache[1] = $event => ((selected).value = $event)),
       results: __props.results
     }, {
-      default: withCtx(({ result }) => _cache[2] || (_cache[2] = [
-        createTextVNode(" person search ")
-      ])),
+      selected: withCtx(() => [
+        createTextVNode(toDisplayString(selected.value.name), 1)
+      ]),
+      default: withCtx(() => [
+        createBaseVNode("div", _hoisted_2, [
+          createBaseVNode("div", _hoisted_3, " Suggested (" + toDisplayString(suggestedResults.value.length) + ") ", 1),
+          (openBlock(true), createElementBlock(Fragment, null, renderList(suggestedResults.value, (result) => {
+            return (openBlock(), createBlock(SearchResultItem, {
+              key: result.id,
+              result: result
+            }, {
+              header: withCtx(() => [
+                createTextVNode(toDisplayString(result.name), 1)
+              ]),
+              detail: withCtx(() => [
+                createBaseVNode("div", _hoisted_4, toDisplayString(result.address), 1),
+                createBaseVNode("div", _hoisted_5, [
+                  createBaseVNode("span", null, toDisplayString(result.email), 1),
+                  _cache[2] || (_cache[2] = createTextVNode(" | ")),
+                  createBaseVNode("span", null, toDisplayString(result.phone), 1),
+                  _cache[3] || (_cache[3] = createTextVNode(" | "))
+                ]),
+                createBaseVNode("div", _hoisted_6, [
+                  createBaseVNode("span", null, toDisplayString(result.company), 1),
+                  _cache[4] || (_cache[4] = createTextVNode(" | ")),
+                  (result.companyRole)
+                    ? (openBlock(), createElementBlock("span", _hoisted_7, "(" + toDisplayString(result.companyRole) + ")", 1))
+                    : createCommentVNode("", true)
+                ])
+              ]),
+              "additional-detail": withCtx(() => [
+                createVNode(InfoTags, {
+                  "result-type": "person",
+                  data: result
+                }, null, 8, ["data"])
+              ]),
+              _: 2
+            }, 1032, ["result"]))
+          }), 128))
+        ]),
+        createBaseVNode("div", _hoisted_8, [
+          createBaseVNode("div", _hoisted_9, " Other (" + toDisplayString(otherResults.value.length) + ") ", 1),
+          (openBlock(true), createElementBlock(Fragment, null, renderList(otherResults.value, (result) => {
+            return (openBlock(), createBlock(SearchResultItem, {
+              key: result.id,
+              result: result
+            }, {
+              header: withCtx(() => [
+                createTextVNode(toDisplayString(result.name), 1)
+              ]),
+              detail: withCtx(() => [
+                createBaseVNode("div", _hoisted_10, toDisplayString(result.address), 1),
+                createBaseVNode("div", _hoisted_11, [
+                  createBaseVNode("span", null, toDisplayString(result.email), 1),
+                  _cache[5] || (_cache[5] = createTextVNode(" | ")),
+                  createBaseVNode("span", null, toDisplayString(result.phone), 1),
+                  _cache[6] || (_cache[6] = createTextVNode(" | "))
+                ]),
+                createBaseVNode("div", _hoisted_12, [
+                  createBaseVNode("span", null, toDisplayString(result.company), 1),
+                  _cache[7] || (_cache[7] = createTextVNode(" | ")),
+                  (result.companyRole)
+                    ? (openBlock(), createElementBlock("span", _hoisted_13, "(" + toDisplayString(result.companyRole) + ")", 1))
+                    : createCommentVNode("", true)
+                ])
+              ]),
+              "additional-detail": withCtx(() => [
+                createVNode(InfoTags, {
+                  "result-type": "person",
+                  data: result
+                }, null, 8, ["data"])
+              ]),
+              _: 2
+            }, 1032, ["result"]))
+          }), 128))
+        ])
+      ]),
       _: 1
     }, 8, ["modelValue", "selected", "results"])
   ]))
@@ -18622,16 +18872,20 @@ return (_ctx, _cache) => {
 }
 
 };
+const PersonSearchCeComponent = /*#__PURE__*/_export_sfc(_sfc_main, [['styles',[_style_0]],['__scopeId',"data-v-273e90fa"]]);
 
 const ClientSearch = defineCustomElement(ClientSearchCeComponent);
 const AddressSearch = defineCustomElement(_sfc_main$1);
-const PersonSearch = defineCustomElement(_sfc_main);
-const SearchWrapper = defineCustomElement(SearchWrapperCeComponent);
+const PersonSearch = defineCustomElement(PersonSearchCeComponent);
 
 if (typeof window !== 'undefined') {
     customElements.define('client-search', ClientSearch);
     customElements.define('address-search', AddressSearch);
     customElements.define('person-search', PersonSearch);
-    customElements.define('search-wrapper', SearchWrapper);
+
+    window.SharedUI = window.SharedUI || {};
+    window.SharedUI.confirmModal = confirmModal;
 }
+
+export { AddressSearch, ClientSearch, PersonSearch, confirmModal };
 //# sourceMappingURL=index.js.map
